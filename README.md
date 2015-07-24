@@ -13,3 +13,24 @@ Características:
 * Acesso fácil aos PDFs de julgamentos e regulamentos; 
 * Integração com o Instagram para mostrar as fotos da conta [recifebomdebola](http://instagram.com/recifebomdebola/); 
 * Contato dos responsáveis pelo projeto (site, email e telefones).
+
+## ScreenShots do App
+![Alt text](/screenshots/android-1.png?raw=true)
+![Alt text](/screenshots/android-2.png?raw=true)
+![Alt text](/screenshots/android-3.png?raw=true)
+![Alt text](/screenshots/android-4.png?raw=true)
+![Alt text](/screenshots/android-5.png?raw=true)
+![Alt text](/screenshots/android-6.png?raw=true)
+![Alt text](/screenshots/android-7.png?raw=true)
+![Alt text](/screenshots/android-8.png?raw=true)
+![Alt text](/screenshots/android-9.png?raw=true)
+![Alt text](/screenshots/android-10.png?raw=true)
+![Alt text](/screenshots/android-11.png?raw=true)
+
+## ScreenShots do Parse
+![Alt text](/screenshots/parse-1.png?raw=true)
+![Alt text](/screenshots/parse-2.png?raw=true)
+![Alt text](/screenshots/parse-3.png?raw=true)
+![Alt text](/screenshots/parse-4.png?raw=true)
+![Alt text](/screenshots/parse-5.png?raw=true)
+![Alt text](/screenshots/parse-6.png?raw=true)
