@@ -1,4 +1,4 @@
-# RecifeBomDeBola
+# RECIFE Bom de Bola
 Versão mobile de https://recifebomdebola.wordpress.com
 
 App **Android nativo** desenvolvido durante a [Campus Party Recife 2015](http://recife.campus-party.org/) para o [Hacker Cidadão 3.0](http://hackercidadao.com.br/)
