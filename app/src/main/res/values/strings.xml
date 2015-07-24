@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">RECIFE Bom de Bola</string>
+
+    <string name="facebook">Facebook</string>
+    <string name="instagram">Instagram</string>
+
+    <string name="team">Equipe</string>
+    <string name="player">Jogador</string>
+    <string name="number">N˚</string>
+    <string name="close">Fechar</string>
+    <string name="connect_to_internet">Conecte-se a Internet</string>
+    <string name="no_photo_found">Nenhuma foto encontrada</string>
+    <string name="demo_message">DEMONSTRAÇÃO: Nem todas as informações são verdadeiras</string>
+
+    <string name="about_developer">DESENVOLVEDOR</string>
+    <string name="about_author_name">Adriel Café</string>
+    <string name="about_author_email">ac@adrielcafe.com</string>
+    <string name="about_author_phone">(81) 9842-1311</string>
+    <string name="about_free_software">SOFTWARE LIVRE</string>
+    <string name="about_source_code_github">Código-fonte disponível no GitHub</string>
+    <string name="about_github_repo_url">http://github.com/adrielcafe/RecifeBomDeBola</string>
+
+    <string name="navigation_drawer_open">Abrir</string>
+    <string name="navigation_drawer_close">Fechar</string>
+
+    <string name="navigation_drawer_item_agenda">Agenda</string>
+    <string name="navigation_drawer_item_leaderboard">Classificação</string>
+    <string name="navigation_drawer_item_fields">Campos</string>
+    <string name="navigation_drawer_item_judgments">Julgamentos</string>
+    <string name="navigation_drawer_item_rules">Regulamento</string>
+    <string name="navigation_drawer_item_photos">Fotos</string>
+    <string name="navigation_drawer_item_contact">Contato</string>
+    <string name="navigation_drawer_item_about">Sobre</string>
+
+    <string-array name="navigation_drawer_items">
+        <item>@string/navigation_drawer_item_agenda</item>
+        <item>@string/navigation_drawer_item_leaderboard</item>
+        <item>@string/navigation_drawer_item_fields</item>
+        <item>@string/navigation_drawer_item_judgments</item>
+        <item>@string/navigation_drawer_item_rules</item>
+        <item>@string/navigation_drawer_item_photos</item>
+        <item>@string/navigation_drawer_item_contact</item>
+        <item>@string/navigation_drawer_item_about</item>
+    </string-array>
+
+</resources>

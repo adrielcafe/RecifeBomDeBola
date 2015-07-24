@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.adrielcafe.recifebomdebola" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".App"
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:theme="@style/AppTheme"
+        android:hardwareAccelerated="true"
+        android:allowBackup="true" >
+
+        <activity
+            android:name=".ui.SplashScreenActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBN6JY9dileeRs45A_OqS2-XV60Czr3WU0"/>
+
+        <meta-data
+            android:name="com.parse.APPLICATION_ID"
+            android:value="0hEuAAgmRMX3lc0agYkUt79bUiZR4sUI60QszMvJ" />
+        <meta-data
+            android:name="com.parse.CLIENT_KEY"
+            android:value="dQ004DlzrLDswh8Bsh3S3NxbC9acSlfv72Zz3MyX" />
+
+    </application>
+
+</manifest>

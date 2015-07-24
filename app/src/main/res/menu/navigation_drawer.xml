@@ -1,0 +1,50 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/drawer_agenda"
+            android:checked="true"
+            android:icon="@drawable/ic_agenda"
+            android:title="@string/navigation_drawer_item_agenda"/>
+
+        <item
+            android:id="@+id/drawer_leaderboard"
+            android:icon="@drawable/ic_leaderboard"
+            android:title="@string/navigation_drawer_item_leaderboard"/>
+
+        <item
+            android:id="@+id/drawer_fields"
+            android:icon="@drawable/ic_fields"
+            android:title="@string/navigation_drawer_item_fields"/>
+
+        <item
+            android:id="@+id/drawer_judgments"
+            android:icon="@drawable/ic_judgments"
+            android:title="@string/navigation_drawer_item_judgments"/>
+
+        <item
+            android:id="@+id/drawer_rules"
+            android:icon="@drawable/ic_rules"
+            android:title="@string/navigation_drawer_item_rules"/>
+
+        <item
+            android:id="@+id/drawer_photos"
+            android:icon="@drawable/ic_photos"
+            android:title="@string/navigation_drawer_item_photos"/>
+
+        <item
+            android:id="@+id/drawer_contact"
+            android:icon="@drawable/ic_contact"
+            android:title="@string/navigation_drawer_item_contact"/>
+
+        <item
+            android:id="@+id/drawer_about"
+            android:icon="@drawable/ic_about"
+            android:title="@string/navigation_drawer_item_about"/>
+
+    </group>
+
+</menu>

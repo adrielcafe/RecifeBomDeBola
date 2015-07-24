@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeightSmall"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:orientation="horizontal"
+    android:weightSum="1" >
+
+    <TextView
+        android:id="@+id/position"
+        android:gravity="left|center_vertical"
+        style="@style/LeaderBoardTextView"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_weight="0.5"
+        android:gravity="left|center_vertical"
+        android:maxLines="2"
+        style="@style/LeaderBoardTextView"/>
+
+    <TextView
+        android:id="@+id/matches"
+        style="@style/LeaderBoardTextView"/>
+
+    <TextView
+        android:id="@+id/score"
+        style="@style/LeaderBoardTextView"/>
+
+    <TextView
+        android:id="@+id/yellow_cards"
+        style="@style/LeaderBoardTextView"/>
+
+    <TextView
+        android:id="@+id/red_cards"
+        style="@style/LeaderBoardTextView"/>
+
+</LinearLayout>

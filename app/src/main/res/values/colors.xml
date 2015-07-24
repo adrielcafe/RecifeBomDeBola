@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#2196F3</color>
+    <color name="primary_dark">#1976D2</color>
+    <color name="accent">#87D37C</color>
+
+    <color name="main_bg">#ECF0F1</color>
+    <color name="gif_bg">#62b849</color>
+    <color name="navigation_drawer_bg">#22313F</color>
+
+    <color name="text_shadow">#7F000000</color>
+
+    <color name="red">#E74C3C</color>
+    <color name="yellow">#F1C40F</color>
+    <color name="gray">#bdc3c7</color>
+</resources>
