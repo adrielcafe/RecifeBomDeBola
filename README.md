@@ -10,5 +10,5 @@ Características:
 * Tabela de classificação (com filtro por categoria e RPA) 
 * Visualização dos campos de futebol no mapa com algumas informações adicionais 
 * Acesso fácil aos PDFs de julgamentos e regulamentos 
-* Integração com o Instagram para mostrar as fotos da conta https://instagram.com/recifebomdebola/ 
+* Integração com o Instagram para mostrar as fotos da conta [recifebomdebola](http://instagram.com/recifebomdebola/) 
 * Contato dos responsáveis pelo projeto (site, email e telefones)
