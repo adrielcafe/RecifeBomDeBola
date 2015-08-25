@@ -27,3 +27,6 @@ proguard/
 
 *.trace
 *.iml
+
+.idea/
+.DS_Store
