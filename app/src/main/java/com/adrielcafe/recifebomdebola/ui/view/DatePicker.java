@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.HorizontalScrollView;
@@ -305,6 +306,26 @@ public class DatePicker extends HorizontalScrollView implements View.OnClickList
         int selectedMonth = dayView.getMonth();
         int selectedYear = dayView.getYear();
         setSelectedDay(new LocalDateTime().withDate(selectedYear, selectedMonth, selectedDay), true, NO_DELAY_SELECTION);
+    }
+
+    /**
+     * Custom implementation for left and right spaces
+     */
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+
+        if(changed) {
+            int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, getResources().getDisplayMetrics());
+
+            LinearLayout.LayoutParams leftParams = (LinearLayout.LayoutParams) mLeftSpace.getLayoutParams();
+            leftParams.width = getWidth() / 4 - padding;
+            mLeftSpace.setLayoutParams(leftParams);
+
+            LinearLayout.LayoutParams rightParams = (LinearLayout.LayoutParams) mRightSpace.getLayoutParams();
+            rightParams.width = getWidth() / 4 - padding;
+            mRightSpace.setLayoutParams(rightParams);
+        }
     }
 
     /**

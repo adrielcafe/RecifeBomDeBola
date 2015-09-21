@@ -16,7 +16,7 @@
         app:alwaysDisplayMonth="true"
         app:daysContainerBackgroundColor="@color/primary_dark"
         app:dayTextColor="@android:color/white"
-        app:selectedDayTextColor="@android:color/white"
+        app:selectedDayTextColor="@android:color/black"
         app:selectedDayBackgroundColor="@color/accent"/>
 
     <android.support.v4.view.ViewPager

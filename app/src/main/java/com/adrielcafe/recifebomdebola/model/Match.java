@@ -4,7 +4,6 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @ParseClassName("Jogos")
 public class Match extends ParseObject implements Serializable {
@@ -24,20 +23,20 @@ public class Match extends ParseObject implements Serializable {
         return getString("golsEquipe2");
     }
 
-    public String getTeam1YellowCards() {
-        return getString("cartoesAmarelosEquipe1");
+    public int getTeam1YellowCards() {
+        return getInt("cartoesAmarelosEquipe1");
     }
 
-    public String getTeam2YellowCards() {
-        return getString("cartoesAmarelosEquipe2");
+    public int getTeam2YellowCards() {
+        return getInt("cartoesAmarelosEquipe2");
     }
 
-    public String getTeam1RedCards() {
-        return getString("cartoesVermelhosEquipe1");
+    public int getTeam1RedCards() {
+        return getInt("cartoesVermelhosEquipe1");
     }
 
-    public String getTeam2RedCards() {
-        return getString("cartoesVermelhosEquipe2");
+    public int getTeam2RedCards() {
+        return getInt("cartoesVermelhosEquipe2");
     }
 
     public String getStep() {
@@ -60,8 +59,8 @@ public class Match extends ParseObject implements Serializable {
         return getString("campo");
     }
 
-    public Date getDate() {
-        return getDate("data");
+    public String getDate() {
+        return getString("data");
     }
 
     public String getStartHour() {

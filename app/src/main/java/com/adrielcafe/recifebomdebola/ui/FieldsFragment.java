@@ -68,7 +68,7 @@ public class FieldsFragment extends Fragment implements OnMapReadyCallback {
             map.addMarker(new MarkerOptions()
                     .position(latLng)
                     .title(field.getName())
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
         }
         map.moveCamera(CameraUpdateFactory.newLatLngBounds(latLngBoundsBuilder.build(), 50));
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -83,6 +83,8 @@ public class FieldsFragment extends Fragment implements OnMapReadyCallback {
                             .withMessage(message)
                             .withDuration(300)
                             .withEffect(Effectstype.Fadein)
+                            .withTitleColor(getResources().getColor(android.R.color.black))
+                            .withMessageColor(getResources().getColor(android.R.color.black))
                             .withDialogColor(getResources().getColor(R.color.accent))
                             .withButton1Text(getString(R.string.close))
                             .setButton1Click(new View.OnClickListener() {

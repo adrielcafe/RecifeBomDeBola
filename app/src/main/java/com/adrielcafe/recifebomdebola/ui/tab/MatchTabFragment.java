@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,17 +88,25 @@ public class MatchTabFragment extends Fragment {
         Db.getMatches(activity, category, rpa, date, new FindCallback<Match>() {
             @Override
             public void done(final List<Match> list, ParseException e) {
-                ParseObject.pinAllInBackground(list);
-                HashMap<String, List<Match>> groupTeams = getGroupMatches(list);
-                List<String> sortedGroups = new ArrayList<>(groupTeams.keySet());
-                Collections.sort(sortedGroups);
+                if (list != null && !list.isEmpty()) {
+                    ParseObject.pinAllInBackground(list);
+                    HashMap<String, List<Match>> groupTeams = getGroupMatches(list);
+                    List<String> sortedGroups = new ArrayList<>(groupTeams.keySet());
+                    Collections.sort(sortedGroups);
 
-                for (String group : sortedGroups) {
-                    ListView listView = (ListView) activity.getLayoutInflater().inflate(R.layout.fragment_match_list, null);
-                    listView.setAdapter(new MatchAdapter(activity, groupTeams.get(group)));
-                    addListHeader(listView, group);
-                    contentLayout.addView(listView);
-                    Util.setListViewHeightBasedOnChildren(listView);
+                    for (String group : sortedGroups) {
+                        ListView listView = (ListView) activity.getLayoutInflater().inflate(R.layout.fragment_match_list, null);
+                        listView.setAdapter(new MatchAdapter(activity, groupTeams.get(group)));
+                        addListHeader(listView, group);
+                        contentLayout.addView(listView);
+                        Util.setListViewHeightBasedOnChildren(listView);
+                    }
+
+                    contentLayout.setGravity(Gravity.LEFT | Gravity.TOP);
+                } else {
+                    View emptyView = Util.getEmptyView(activity);
+                    contentLayout.addView(emptyView);
+                    contentLayout.setGravity(Gravity.CENTER);
                 }
 
                 activity.runOnUiThread(new Runnable() {

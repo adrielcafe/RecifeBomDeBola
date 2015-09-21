@@ -10,8 +10,8 @@
     <string name="number">N˚</string>
     <string name="close">Fechar</string>
     <string name="connect_to_internet">Conecte-se a Internet</string>
-    <string name="no_photo_found">Nenhuma foto encontrada</string>
-    <string name="demo_message">DEMONSTRAÇÃO: Nem todas as informações são verdadeiras</string>
+    <string name="no_photo_found">Nenhuma Foto Encontrada</string>
+    <string name="no_match_found">Nenhum Jogo Encontrado</string>
 
     <string name="about_developer">DESENVOLVEDOR</string>
     <string name="about_author_name">Adriel Café</string>

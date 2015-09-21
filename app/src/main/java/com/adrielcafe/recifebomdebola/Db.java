@@ -1,7 +1,6 @@
 package com.adrielcafe.recifebomdebola;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.adrielcafe.recifebomdebola.model.Category;
 import com.adrielcafe.recifebomdebola.model.Contact;
@@ -114,7 +113,6 @@ public class Db {
 
     public static void getMatches(Context context, String category, int rpa, DateTime date, FindCallback<Match> callback){
         try {
-            Log.i("FORMAT DATE", date.toString("dd/MM/YY"));
             if(Util.isConnected(context)) {
                 ParseQuery.getQuery(Match.class)
                         .whereEqualTo("modalidade", category)

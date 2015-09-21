@@ -78,8 +78,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         drawerLayout.closeDrawers();
-        switch (menuItem == null ? R.id.drawer_agenda : menuItem.getItemId()) {
-            case R.id.drawer_agenda:
+        switch (menuItem == null ? R.id.drawer_matches : menuItem.getItemId()) {
+            case R.id.drawer_matches:
                 if(currentFragment instanceof MatchesFragment){
                     return false;
                 }

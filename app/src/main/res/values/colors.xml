@@ -2,7 +2,7 @@
 <resources>
     <color name="primary">#2196F3</color>
     <color name="primary_dark">#1976D2</color>
-    <color name="accent">#87D37C</color>
+    <color name="accent">#FFD800</color>
 
     <color name="main_bg">#ECF0F1</color>
     <color name="gif_bg">#62B849</color>
@@ -10,7 +10,8 @@
 
     <color name="text_shadow">#7F000000</color>
 
-    <color name="red">#E74C3C</color>
+    <color name="green">#388E3C</color>
+    <color name="red">#D32F2F</color>
     <color name="yellow">#F1C40F</color>
     <color name="gray">#bdc3c7</color>
 </resources>

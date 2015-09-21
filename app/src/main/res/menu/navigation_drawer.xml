@@ -5,9 +5,9 @@
         android:checkableBehavior="single">
 
         <item
-            android:id="@+id/drawer_agenda"
+            android:id="@+id/drawer_matches"
             android:checked="true"
-            android:icon="@drawable/ic_agenda"
+            android:icon="@drawable/ic_matches"
             android:title="@string/navigation_drawer_item_agenda"/>
 
         <item

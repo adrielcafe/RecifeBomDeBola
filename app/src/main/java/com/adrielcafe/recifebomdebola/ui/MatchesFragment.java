@@ -38,8 +38,12 @@ public class MatchesFragment extends Fragment {
         datePicker.setDayViewOnClickListener(new DatePicker.DayViewOnClickListener() {
             @Override
             public void onDaySelected(DateTime date) {
-                currentDate = date;
-                setupViewPager();
+                if(currentDate == null || currentDate.getYear() != date.getYear() ||
+                        currentDate.getMonthOfYear() != date.getMonthOfYear() ||
+                        currentDate.getDayOfMonth() != date.getDayOfMonth()) {
+                    currentDate = date;
+                    setupViewPager();
+                }
             }
         });
         datePicker.setSelectedDay(LocalDateTime.now(), false, 0);

@@ -1,5 +1,6 @@
 package com.adrielcafe.recifebomdebola;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -12,6 +13,7 @@ import android.text.style.TypefaceSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.IconTextView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -85,6 +87,36 @@ public class Util {
                 s.substring(1).toLowerCase();
     }
 
+    public static View getEmptyView(Activity activity){
+        View emptyView = activity.getLayoutInflater().inflate(R.layout.empty, null);
+        IconTextView iconView = (IconTextView) emptyView.findViewById(android.R.id.icon);
+        iconView.setTypeface(Iconify.getTypeface(activity));
+        return emptyView;
+    }
+
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        try {
+            ListAdapter listAdapter = listView.getAdapter();
+            int numberOfItems = listAdapter.getCount();
+
+            int totalItemsHeight = 0;
+            for (int itemPos = 0; itemPos < numberOfItems; itemPos++) {
+                float px = 200 * (listView.getResources().getDisplayMetrics().density);
+                View item = listAdapter.getView(itemPos, null, listView);
+                item.measure(View.MeasureSpec.makeMeasureSpec((int)px, View.MeasureSpec.AT_MOST), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+                totalItemsHeight += item.getMeasuredHeight();
+            }
+
+            int totalDividersHeight = listView.getDividerHeight() * (numberOfItems - 1);
+            int totalPadding = listView.getPaddingTop() + listView.getPaddingBottom();
+
+            ViewGroup.LayoutParams params = listView.getLayoutParams();
+            params.height = totalItemsHeight + totalDividersHeight + totalPadding;
+            listView.setLayoutParams(params);
+            listView.requestLayout();
+        } catch (Exception e){ }
+    }
+
     public static boolean isConnected(Context context){
         if(connectivityManager == null) {
             connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -135,28 +167,5 @@ public class Util {
         } else {
             return false;
         }
-    }
-
-    public static void setListViewHeightBasedOnChildren(ListView listView) {
-        try {
-            ListAdapter listAdapter = listView.getAdapter();
-            int numberOfItems = listAdapter.getCount();
-
-            int totalItemsHeight = 0;
-            for (int itemPos = 0; itemPos < numberOfItems; itemPos++) {
-                float px = 200 * (listView.getResources().getDisplayMetrics().density);
-                View item = listAdapter.getView(itemPos, null, listView);
-                item.measure(View.MeasureSpec.makeMeasureSpec((int)px, View.MeasureSpec.AT_MOST), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-                totalItemsHeight += item.getMeasuredHeight();
-            }
-
-            int totalDividersHeight = listView.getDividerHeight() * (numberOfItems - 1);
-            int totalPadding = listView.getPaddingTop() + listView.getPaddingBottom();
-
-            ViewGroup.LayoutParams params = listView.getLayoutParams();
-            params.height = totalItemsHeight + totalDividersHeight + totalPadding;
-            listView.setLayoutParams(params);
-            listView.requestLayout();
-        } catch (Exception e){ }
     }
 }

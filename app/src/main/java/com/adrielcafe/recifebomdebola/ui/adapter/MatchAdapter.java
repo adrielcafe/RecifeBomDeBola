@@ -50,8 +50,8 @@ public class MatchAdapter extends ArrayAdapter<Match> {
 
         viewHolder.team1View.setText(Util.toCamelCase(match.getTeam1()));
         viewHolder.team2View.setText(Util.toCamelCase(match.getTeam2()));
-        viewHolder.team1ScoreView.setText(match.getTeam1Goals());
-        viewHolder.team2ScoreView.setText(match.getTeam2Goals());
+        viewHolder.team1ScoreView.setText(match.getTeam1Goals()+"");
+        viewHolder.team2ScoreView.setText(match.getTeam2Goals() + "");
         viewHolder.detailsView.setText(details);
 
         viewHolder.team1ScoreView.setVisibility(Util.isNullOrEmpty(match.getTeam1Goals()) ? View.GONE : View.VISIBLE);
@@ -59,6 +59,14 @@ public class MatchAdapter extends ArrayAdapter<Match> {
         viewHolder.detailsView.setVisibility(Util.isNullOrEmpty(details) ? View.GONE : View.VISIBLE);
 
         viewHolder.versusView.setTypeface(Iconify.getTypeface(getContext()));
+
+        if(match.getStatus().equals("CONFIRMADO")) {
+            viewHolder.versusView.setTextColor(getContext().getResources().getColor(R.color.green));
+        } else if(match.getStatus().equals("CANCELADO")){
+            viewHolder.versusView.setTextColor(getContext().getResources().getColor(R.color.red));
+        } else {
+            viewHolder.versusView.setTextColor(viewHolder.versusView.getTextColors());
+        }
 
         return convertView;
     }

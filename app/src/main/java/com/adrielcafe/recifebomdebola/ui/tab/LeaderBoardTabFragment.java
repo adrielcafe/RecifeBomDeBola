@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,24 +90,32 @@ public class LeaderBoardTabFragment extends Fragment {
         Db.getTeams(activity, category, rpa, new FindCallback<Team>() {
             @Override
             public void done(final List<Team> list, ParseException e) {
-                ParseObject.pinAllInBackground(list);
-                HashMap<String, List<Team>> groupTeams = getGroupTeams(list);
-                List<String> sortedGroups = new ArrayList<>(groupTeams.keySet());
-                Collections.sort(sortedGroups);
+                if (list != null && !list.isEmpty()) {
+                    ParseObject.pinAllInBackground(list);
+                    HashMap<String, List<Team>> groupTeams = getGroupTeams(list);
+                    List<String> sortedGroups = new ArrayList<>(groupTeams.keySet());
+                    Collections.sort(sortedGroups);
 
-                for (String group : sortedGroups) {
-                    ListView listView = (ListView) activity.getLayoutInflater().inflate(R.layout.fragment_leaderboard_list, null);
-                    listView.setAdapter(new LeaderBoardAdapter(activity, groupTeams.get(group)));
-                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Team team = list.get(position);
-                            //openPlayersDialog(team);
-                        }
-                    });
-                    addListHeader(listView, group);
-                    contentLayout.addView(listView);
-                    Util.setListViewHeightBasedOnChildren(listView);
+                    for (String group : sortedGroups) {
+                        ListView listView = (ListView) activity.getLayoutInflater().inflate(R.layout.fragment_leaderboard_list, null);
+                        listView.setAdapter(new LeaderBoardAdapter(activity, groupTeams.get(group)));
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Team team = list.get(position);
+                                //openPlayersDialog(team);
+                            }
+                        });
+                        addListHeader(listView, group);
+                        contentLayout.addView(listView);
+                        Util.setListViewHeightBasedOnChildren(listView);
+                    }
+
+                    contentLayout.setGravity(Gravity.LEFT | Gravity.TOP);
+                } else {
+                    View emptyView = Util.getEmptyView(activity);
+                    contentLayout.addView(emptyView);
+                    contentLayout.setGravity(Gravity.CENTER);
                 }
 
 //                Collections.sort(list, new Comparator<Team>() {
