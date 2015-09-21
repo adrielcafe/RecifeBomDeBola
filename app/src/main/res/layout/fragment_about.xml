@@ -120,6 +120,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/loading_gif"/>
+        android:src="@drawable/about_gif"/>
 
 </RelativeLayout>

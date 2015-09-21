@@ -2,10 +2,10 @@ package com.adrielcafe.recifebomdebola;
 
 import android.app.Application;
 
-import com.adrielcafe.recifebomdebola.model.Agenda;
 import com.adrielcafe.recifebomdebola.model.Category;
 import com.adrielcafe.recifebomdebola.model.Contact;
 import com.adrielcafe.recifebomdebola.model.Field;
+import com.adrielcafe.recifebomdebola.model.Match;
 import com.adrielcafe.recifebomdebola.model.Player;
 import com.adrielcafe.recifebomdebola.model.Team;
 import com.parse.Parse;
@@ -28,6 +28,7 @@ public class App extends Application {
 
     public static final String EXTRA_CATEGORY = "category";
     public static final String EXTRA_RPA = "rpa";
+    public static final String EXTRA_DATE = "date";
 
     public static final int RPA_COUNT = 6;
 
@@ -44,7 +45,7 @@ public class App extends Application {
     }
 
     private void initParse(){
-        ParseObject.registerSubclass(Agenda.class);
+        ParseObject.registerSubclass(Match.class);
         ParseObject.registerSubclass(Field.class);
         ParseObject.registerSubclass(Team.class);
         ParseObject.registerSubclass(Category.class);

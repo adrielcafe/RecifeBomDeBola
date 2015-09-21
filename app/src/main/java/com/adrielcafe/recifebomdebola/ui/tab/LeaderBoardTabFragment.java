@@ -9,11 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.IconTextView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.adrielcafe.recifebomdebola.App;
 import com.adrielcafe.recifebomdebola.Db;
 import com.adrielcafe.recifebomdebola.R;
+import com.adrielcafe.recifebomdebola.Util;
 import com.adrielcafe.recifebomdebola.model.Category;
 import com.adrielcafe.recifebomdebola.model.Player;
 import com.adrielcafe.recifebomdebola.model.Team;
@@ -27,20 +30,21 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class LeaderBoardTabFragment extends Fragment {
-    private MainActivity activity;
+    private static MainActivity activity;
     private String category;
     private int rpa;
 
-    @Bind(android.R.id.list)
-    ListView listView;
+    @Bind(R.id.content)
+    LinearLayout contentLayout;
 
     public static LeaderBoardTabFragment newInstance(Category category, int rpa) {
         Bundle args = new Bundle();
@@ -69,7 +73,9 @@ public class LeaderBoardTabFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        this.activity = (MainActivity) activity;
+        if(LeaderBoardTabFragment.activity == null) {
+            LeaderBoardTabFragment.activity = (MainActivity) activity;
+        }
     }
 
     @Override
@@ -80,30 +86,42 @@ public class LeaderBoardTabFragment extends Fragment {
 
     private void loadLeaderBoard() {
         activity.setLoading(true);
-        Db.getTeams(getActivity(), category, rpa, new FindCallback<Team>() {
+        Db.getTeams(activity, category, rpa, new FindCallback<Team>() {
             @Override
             public void done(final List<Team> list, ParseException e) {
                 ParseObject.pinAllInBackground(list);
-                Collections.sort(list, new Comparator<Team>() {
-                    @Override
-                    public int compare(Team lhs, Team rhs) {
-                        return Integer.valueOf(rhs.getScore()).compareTo(lhs.getScore());
-                    }
-                });
-                for(int i = 0; i < list.size(); i++){
-                    list.get(i).setPositon(i + 1);
+                HashMap<String, List<Team>> groupTeams = getGroupTeams(list);
+                List<String> sortedGroups = new ArrayList<>(groupTeams.keySet());
+                Collections.sort(sortedGroups);
+
+                for (String group : sortedGroups) {
+                    ListView listView = (ListView) activity.getLayoutInflater().inflate(R.layout.fragment_leaderboard_list, null);
+                    listView.setAdapter(new LeaderBoardAdapter(activity, groupTeams.get(group)));
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Team team = list.get(position);
+                            //openPlayersDialog(team);
+                        }
+                    });
+                    addListHeader(listView, group);
+                    contentLayout.addView(listView);
+                    Util.setListViewHeightBasedOnChildren(listView);
                 }
+
+//                Collections.sort(list, new Comparator<Team>() {
+//                    @Override
+//                    public int compare(Team lhs, Team rhs) {
+//                        return Integer.valueOf(rhs.getScore()).compareTo(lhs.getScore());
+//                    }
+//                });
+//                for(int i = 0; i < list.size(); i++){
+//                    list.get(i).setPositon(i + 1);
+//                }
+
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        listView.setAdapter(new LeaderBoardAdapter(getActivity(), list));
-                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                Team team = list.get(position);
-                                openPlayersDialog(team);
-                            }
-                        });
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -126,17 +144,17 @@ public class LeaderBoardTabFragment extends Fragment {
                 IconTextView redCardsView = (IconTextView) playersView.findViewById(R.id.red_cards);
                 IconTextView yellowCardsView = (IconTextView) playersView.findViewById(R.id.yellow_cards);
 
-                redCardsView.setTypeface(Iconify.getTypeface(getActivity()));
-                yellowCardsView.setTypeface(Iconify.getTypeface(getActivity()));
+                redCardsView.setTypeface(Iconify.getTypeface(activity));
+                yellowCardsView.setTypeface(Iconify.getTypeface(activity));
 
                 ParseObject.pinAllInBackground(list);
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        playersList.setAdapter(new PlayerAdapter(getActivity(), list));
+                        playersList.setAdapter(new PlayerAdapter(activity, list));
 
-                        final NiftyDialogBuilder playerDialog = NiftyDialogBuilder.getInstance(getActivity());
-                        playerDialog.setCustomView(playersView, getActivity())
+                        final NiftyDialogBuilder playerDialog = NiftyDialogBuilder.getInstance(activity);
+                        playerDialog.setCustomView(playersView, activity)
                                 .withTitle(team.getName())
                                 .withMessage(null)
                                 .withDuration(300)
@@ -155,5 +173,31 @@ public class LeaderBoardTabFragment extends Fragment {
                 });
             }
         });
+    }
+
+    private HashMap<String, List<Team>> getGroupTeams(List<Team> teams){
+        HashMap<String, List<Team>> groupTeams = new HashMap<>();
+        for (Team team : teams){
+            if (!Util.isNullOrEmpty(team.getGroup())) {
+                if (!groupTeams.containsKey(team.getGroup())) {
+                    groupTeams.put(team.getGroup(), new ArrayList<Team>());
+                }
+                groupTeams.get(team.getGroup()).add(team);
+            }
+        }
+        return groupTeams;
+    }
+
+    private void addListHeader(ListView listView, String group){
+        View headerView = activity.getLayoutInflater().inflate(R.layout.list_header_leaderboard, null);
+        TextView groupView = (TextView) headerView.findViewById(R.id.group);
+        IconTextView redCardsView = (IconTextView) headerView.findViewById(R.id.red_cards);
+        IconTextView yellowCardsView = (IconTextView) headerView.findViewById(R.id.yellow_cards);
+
+        groupView.setText(getString(R.string.group) + " " + group);
+        redCardsView.setTypeface(Iconify.getTypeface(activity));
+        yellowCardsView.setTypeface(Iconify.getTypeface(activity));
+
+        listView.addHeaderView(headerView, null, false);
     }
 }

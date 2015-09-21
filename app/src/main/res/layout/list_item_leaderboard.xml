@@ -12,6 +12,7 @@
     <TextView
         android:id="@+id/position"
         android:gravity="left|center_vertical"
+        android:text="1"
         style="@style/LeaderBoardTextView"/>
 
     <TextView
@@ -23,18 +24,22 @@
 
     <TextView
         android:id="@+id/matches"
+        android:text="0"
         style="@style/LeaderBoardTextView"/>
 
     <TextView
         android:id="@+id/score"
+        android:text="0"
         style="@style/LeaderBoardTextView"/>
 
     <TextView
         android:id="@+id/yellow_cards"
+        android:text="0"
         style="@style/LeaderBoardTextView"/>
 
     <TextView
         android:id="@+id/red_cards"
+        android:text="0"
         style="@style/LeaderBoardTextView"/>
 
 </LinearLayout>

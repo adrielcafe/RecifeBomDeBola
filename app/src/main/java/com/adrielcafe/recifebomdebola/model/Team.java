@@ -5,40 +5,21 @@ import com.parse.ParseObject;
 
 import java.io.Serializable;
 
-@ParseClassName("Team")
+@ParseClassName("Equipes")
 public class Team extends ParseObject implements Serializable {
     public String getName() {
-        return getString("name");
+        return getString("nome");
+    }
+
+    public String getGroup() {
+        return getString("grupo");
     }
 
     public String getCategory() {
-        return getString("category");
+        return getString("modalidade");
     }
 
     public int getRpa() {
         return getInt("rpa");
-    }
-
-    public int getPositon() {
-        return getInt("positon");
-    }
-    public void setPositon(int value) {
-        put("positon", value);
-    }
-
-    public int getMatches() {
-        return getInt("matches");
-    }
-
-    public int getScore() {
-        return getInt("score");
-    }
-
-    public int getRedCards() {
-        return getInt("redCards");
-    }
-
-    public int getYellowCards() {
-        return getInt("yellowCards");
     }
 }

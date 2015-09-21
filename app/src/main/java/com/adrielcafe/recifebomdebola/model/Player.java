@@ -4,47 +4,26 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
 import java.io.Serializable;
-import java.util.Date;
 
-@ParseClassName("Player")
+@ParseClassName("Jogadores")
 public class Player extends ParseObject implements Serializable {
     public String getName() {
-        return getString("name");
+        return getString("NOME_JOGADOR");
     }
 
-    public String getTeam() {
-        return getString("team");
-    }
-
-    public String getCoach() {
-        return getString("coach");
-    }
-
-    public String getAgent() {
-        return getString("agent");
-    }
-
-    public String getCity() {
-        return getString("city");
-    }
-
-    public String getDistrict() {
-        return getString("district");
-    }
-
-    public Date getBirth() {
-        return getDate("birth");
-    }
+//    public String getTeam() {
+//        return getString("team");
+//    }
 
     public int getNumber() {
-        return getInt("number");
-    }
-
-    public int getRedCards() {
-        return getInt("redCards");
+        return getInt("NUMERO_JOGADOR");
     }
 
     public int getYellowCards() {
-        return getInt("yellowCards");
+        return getInt("CARTOES_AMARELOS");
+    }
+
+    public int getRedCards() {
+        return getInt("CARTOES_VERMELHOS");
     }
 }

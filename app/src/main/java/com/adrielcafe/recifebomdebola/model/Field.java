@@ -6,18 +6,18 @@ import com.parse.ParseObject;
 
 import java.io.Serializable;
 
-@ParseClassName("Field")
+@ParseClassName("Campos")
 public class Field extends ParseObject implements Serializable {
     public String getName() {
-        return getString("name");
+        return getString("nome");
     }
 
     public String getAddress() {
-        return getString("address");
+        return getString("endereco");
     }
 
     public String getDistrict() {
-        return getString("district");
+        return getString("bairro");
     }
 
     public int getRpa() {
@@ -29,6 +29,6 @@ public class Field extends ParseObject implements Serializable {
     }
 
     public boolean isPrivate() {
-        return getBoolean("isPrivate");
+        return getBoolean("privado");
     }
 }

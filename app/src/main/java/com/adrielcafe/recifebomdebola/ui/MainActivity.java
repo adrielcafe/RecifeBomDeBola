@@ -3,7 +3,6 @@ package com.adrielcafe.recifebomdebola.ui;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -36,7 +35,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private static final int DELAY = 275;
 
     private Fragment currentFragment;
-    private AgendaFragment agendaFragment;
+    private MatchesFragment matchesFragment;
     private LeaderBoardFragment leaderBoardFragment;
 
     private MenuItem rpaMenuItem;
@@ -74,7 +73,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         initNavigationDrawer();
-        showDemoMessage();
     }
 
     @Override
@@ -82,12 +80,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         drawerLayout.closeDrawers();
         switch (menuItem == null ? R.id.drawer_agenda : menuItem.getItemId()) {
             case R.id.drawer_agenda:
-                if(currentFragment instanceof AgendaFragment){
+                if(currentFragment instanceof MatchesFragment){
                     return false;
                 }
                 title = getString(R.string.navigation_drawer_item_agenda);
-                agendaFragment = new AgendaFragment();
-                currentFragment = agendaFragment;
+                matchesFragment = new MatchesFragment();
+                currentFragment = matchesFragment;
                 break;
             case R.id.drawer_leaderboard:
                 if(currentFragment instanceof LeaderBoardFragment){
@@ -178,8 +176,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 currentRpa = Db.getRpaAtIndex(position);
                 try {
-                    if (currentFragment instanceof AgendaFragment) {
-                        agendaFragment.setupViewPager();
+                    if (currentFragment instanceof MatchesFragment) {
+                        matchesFragment.setupViewPager();
                     } else if (currentFragment instanceof LeaderBoardFragment) {
                         leaderBoardFragment.setupViewPager();
                     }
@@ -243,7 +241,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             rpaMenuItem.setVisible(false);
             facebookMenuItem.setVisible(false);
             instagramMenuItem.setVisible(false);
-            if(currentFragment instanceof AgendaFragment || currentFragment instanceof LeaderBoardFragment){
+            if(currentFragment instanceof MatchesFragment || currentFragment instanceof LeaderBoardFragment){
                 tabLayout.setVisibility(View.VISIBLE);
                 rpaMenuItem.setVisible(true);
             } else if(currentFragment instanceof ContactFragment || currentFragment instanceof PhotosFragment){
@@ -255,16 +253,5 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     public void setLoading(boolean isLoading){
         progressView.setVisibility(isLoading ? View.VISIBLE : View.GONE);
-    }
-
-    private void showDemoMessage() {
-        final Snackbar snackbar = Snackbar.make(containerLayout, R.string.demo_message, Snackbar.LENGTH_LONG);
-        snackbar.setAction(R.string.close, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                snackbar.dismiss();
-            }
-        });
-        snackbar.show();
     }
 }

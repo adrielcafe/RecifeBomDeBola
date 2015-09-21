@@ -26,21 +26,22 @@ dependencies {
 
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.android.support:design:22.2.1'
-    compile 'com.google.android.gms:play-services-maps:7.5.0'
+    compile 'com.google.android.gms:play-services-maps:7.8.0'
 
     compile 'com.nineoldandroids:library:2.4.0'
-    compile 'net.danlew:android.joda:2.8.1'
+    compile 'net.danlew:android.joda:2.8.2'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.goebl:david-webb:1.1.0'
     compile 'com.parse.bolts:bolts-android:1.2.1'
 
-    compile 'com.joanzapata.android:android-iconify:1.0.9'
+    compile 'com.joanzapata.android:android-iconify:1.0.11'
     compile 'com.tsengvn:Typekit:1.0.0@aar'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.4@aar'
-    compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.7@aar'
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.9@aar'
     compile 'com.felipecsl.asymmetricgridview:library:2.0.1@aar'
     compile 'com.lsjwzh:materialloadingprogressbar:0.5.6-RELEASE@aar'
     compile 'com.github.sd6352051.niftydialogeffects:niftydialogeffects:1.0.0@aar'
+    compile 'com.github.asantibanez:Ranger:c67bb86397@aar'
 }

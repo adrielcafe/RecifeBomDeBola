@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="?actionBarSize"
+    android:orientation="vertical">
+
+    <com.adrielcafe.recifebomdebola.ui.view.DatePicker
+        android:id="@+id/date_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbarSize="4dp"
+        app:displayDayOfWeek="true"
+        app:alwaysDisplayMonth="true"
+        app:daysContainerBackgroundColor="@color/primary_dark"
+        app:dayTextColor="@android:color/white"
+        app:selectedDayTextColor="@android:color/white"
+        app:selectedDayBackgroundColor="@color/accent"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

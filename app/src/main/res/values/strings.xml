@@ -1,11 +1,12 @@
 <resources>
-    <string name="app_name">RECIFE Bom de Bola</string>
+    <string name="app_name">Recife Bom de Bola</string>
 
     <string name="facebook">Facebook</string>
     <string name="instagram">Instagram</string>
 
     <string name="team">Equipe</string>
     <string name="player">Jogador</string>
+    <string name="group">Grupo</string>
     <string name="number">N˚</string>
     <string name="close">Fechar</string>
     <string name="connect_to_internet">Conecte-se a Internet</string>
@@ -23,7 +24,7 @@
     <string name="navigation_drawer_open">Abrir</string>
     <string name="navigation_drawer_close">Fechar</string>
 
-    <string name="navigation_drawer_item_agenda">Agenda</string>
+    <string name="navigation_drawer_item_agenda">Agenda de Jogos</string>
     <string name="navigation_drawer_item_leaderboard">Classificação</string>
     <string name="navigation_drawer_item_fields">Campos</string>
     <string name="navigation_drawer_item_judgments">Julgamentos</string>

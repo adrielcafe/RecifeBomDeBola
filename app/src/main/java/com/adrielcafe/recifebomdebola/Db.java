@@ -1,11 +1,12 @@
 package com.adrielcafe.recifebomdebola;
 
 import android.content.Context;
+import android.util.Log;
 
-import com.adrielcafe.recifebomdebola.model.Agenda;
 import com.adrielcafe.recifebomdebola.model.Category;
 import com.adrielcafe.recifebomdebola.model.Contact;
 import com.adrielcafe.recifebomdebola.model.Field;
+import com.adrielcafe.recifebomdebola.model.Match;
 import com.adrielcafe.recifebomdebola.model.Photo;
 import com.adrielcafe.recifebomdebola.model.Player;
 import com.adrielcafe.recifebomdebola.model.Team;
@@ -14,6 +15,7 @@ import com.parse.FindCallback;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -40,6 +42,7 @@ public class Db {
             }
         } catch (Exception e){
             fields = new ArrayList<>();
+            e.printStackTrace();
         }
 
         try {
@@ -53,6 +56,7 @@ public class Db {
             }
         } catch (Exception e){
             contacts = new ArrayList<>();
+            e.printStackTrace();
         }
 
         try {
@@ -66,6 +70,7 @@ public class Db {
             }
         } catch (Exception e){
             teams = new ArrayList<>();
+            e.printStackTrace();
         }
 
         try {
@@ -79,13 +84,88 @@ public class Db {
             }
         } catch (Exception e){
             categories = new ArrayList<>();
+            e.printStackTrace();
         }
 
         rpas = new ArrayList<>();
         for(int i = 1; i <= App.RPA_COUNT; i++){
             rpas.add("RPA " + i);
         }
-        rpas.add("TODOS");
+    }
+
+    public static void getTeams(Context context, String category, int rpa, FindCallback<Team> callback){
+        try {
+            if(Util.isConnected(context)) {
+                ParseQuery.getQuery(Team.class)
+                        .whereEqualTo("modalidade", category)
+                        .whereEqualTo("rpa", rpa)
+                        .findInBackground(callback);
+            } else {
+                ParseQuery.getQuery(Team.class)
+                        .fromLocalDatastore()
+                        .whereEqualTo("modalidade", category)
+                        .whereEqualTo("rpa", rpa)
+                        .findInBackground(callback);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void getMatches(Context context, String category, int rpa, DateTime date, FindCallback<Match> callback){
+        try {
+            Log.i("FORMAT DATE", date.toString("dd/MM/YY"));
+            if(Util.isConnected(context)) {
+                ParseQuery.getQuery(Match.class)
+                        .whereEqualTo("modalidade", category)
+                        .whereEqualTo("rpa", rpa)
+                        .whereEqualTo("data", date.toString("dd/MM/YY"))
+                        .orderByDescending("data")
+                        .findInBackground(callback);
+            } else {
+                ParseQuery.getQuery(Match.class)
+                        .fromLocalDatastore()
+                        .whereEqualTo("modalidade", category)
+                        .whereEqualTo("rpa", rpa)
+                        .whereEqualTo("data", date.toString("dd/MM/YY"))
+                        .orderByDescending("data")
+                        .findInBackground(callback);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void getTeamPlayers(Context context, String teamName, FindCallback<Player> callback){
+        try {
+            if(Util.isConnected(context)) {
+                ParseQuery.getQuery(Player.class)
+                        .whereEqualTo("team", teamName)
+                        .orderByAscending("number")
+                        .findInBackground(callback);
+            } else {
+                ParseQuery.getQuery(Player.class)
+                        .fromLocalDatastore()
+                        .whereEqualTo("team", teamName)
+                        .orderByAscending("number")
+                        .findInBackground(callback);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static Field getFieldByName(String name){
+        for(Field field : fields){
+            if(field.getName().equalsIgnoreCase(name)){
+                return field;
+            }
+        }
+        return null;
+    }
+
+    public static int getRpaAtIndex(int rpaIndex){
+        return rpaIndex + 1;
     }
 
     public static void loadPhotos(){
@@ -108,87 +188,10 @@ public class Db {
                         photos.add(photo);
                     }
                 }
-            } catch (Exception e) { }
-        }
-    }
-
-    public static void getTeams(Context context, String category, int rpa, FindCallback<Team> callback){
-        try {
-            if(Util.isConnected(context)) {
-                if(rpa == 0){
-                    ParseQuery.getQuery(Team.class)
-                            .whereEqualTo("category", category)
-                            .findInBackground(callback);
-                } else {
-                    ParseQuery.getQuery(Team.class)
-                            .whereEqualTo("category", category)
-                            .whereEqualTo("rpa", rpa)
-                            .findInBackground(callback);
-                }
-            } else {
-                ParseQuery.getQuery(Team.class)
-                        .fromLocalDatastore()
-                        .whereEqualTo("category", category)
-                        .whereEqualTo("rpa", rpa)
-                        .findInBackground(callback);
-            }
-        } catch (Exception e){ }
-    }
-
-    public static void getAgenda(Context context, String category, int rpa, FindCallback<Agenda> callback){
-        try {
-            if(Util.isConnected(context)) {
-                if(rpa == 0){
-                    ParseQuery.getQuery(Agenda.class)
-                            .whereEqualTo("category", category)
-                            .orderByDescending("date")
-                            .findInBackground(callback);
-                } else {
-                    ParseQuery.getQuery(Agenda.class)
-                            .whereEqualTo("category", category)
-                            .whereEqualTo("rpa", rpa)
-                            .orderByDescending("date")
-                            .findInBackground(callback);
-                }
-            } else {
-                ParseQuery.getQuery(Agenda.class)
-                        .fromLocalDatastore()
-                        .whereEqualTo("category", category)
-                        .whereEqualTo("rpa", rpa)
-                        .orderByDescending("date")
-                        .findInBackground(callback);
-            }
-        } catch (Exception e){ }
-    }
-
-    public static void getTeamPlayers(Context context, String teamName, FindCallback<Player> callback){
-        try {
-            if(Util.isConnected(context)) {
-                ParseQuery.getQuery(Player.class)
-                        .whereEqualTo("team", teamName)
-                        .orderByAscending("number")
-                        .findInBackground(callback);
-            } else {
-                ParseQuery.getQuery(Player.class)
-                        .fromLocalDatastore()
-                        .whereEqualTo("team", teamName)
-                        .orderByAscending("number")
-                        .findInBackground(callback);
-            }
-        } catch (Exception e){ }
-    }
-
-    public static Field getFieldByName(String name){
-        for(Field field : fields){
-            if(field.getName().equalsIgnoreCase(name)){
-                return field;
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-        return null;
-    }
-
-    public static int getRpaAtIndex(int rpaIndex){
-        return rpaIndex == App.RPA_COUNT ? 0 : rpaIndex + 1;
     }
 
 }

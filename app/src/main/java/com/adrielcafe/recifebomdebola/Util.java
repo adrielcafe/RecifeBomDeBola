@@ -10,6 +10,10 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.TypefaceSpan;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.joanzapata.android.iconify.IconDrawable;
 import com.joanzapata.android.iconify.Iconify;
@@ -59,13 +63,21 @@ public class Util {
         return picasso;
     }
 
+    public static boolean isNullOrEmpty(String str) {
+        return str == null || str.isEmpty();
+    }
+
     public static String toCamelCase(String s){
-        String[] parts = s.split("_");
-        String camelCaseString = "";
-        for (String part : parts){
-            camelCaseString = camelCaseString + toProperCase(part);
+        try {
+            String[] parts = s.split("_");
+            String camelCaseString = "";
+            for (String part : parts){
+                camelCaseString = camelCaseString + toProperCase(part);
+            }
+            return camelCaseString;
+        } catch (Exception e){
+            return s;
         }
-        return camelCaseString;
     }
 
     private static String toProperCase(String s) {
@@ -123,5 +135,28 @@ public class Util {
         } else {
             return false;
         }
+    }
+
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        try {
+            ListAdapter listAdapter = listView.getAdapter();
+            int numberOfItems = listAdapter.getCount();
+
+            int totalItemsHeight = 0;
+            for (int itemPos = 0; itemPos < numberOfItems; itemPos++) {
+                float px = 200 * (listView.getResources().getDisplayMetrics().density);
+                View item = listAdapter.getView(itemPos, null, listView);
+                item.measure(View.MeasureSpec.makeMeasureSpec((int)px, View.MeasureSpec.AT_MOST), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+                totalItemsHeight += item.getMeasuredHeight();
+            }
+
+            int totalDividersHeight = listView.getDividerHeight() * (numberOfItems - 1);
+            int totalPadding = listView.getPaddingTop() + listView.getPaddingBottom();
+
+            ViewGroup.LayoutParams params = listView.getLayoutParams();
+            params.height = totalItemsHeight + totalDividersHeight + totalPadding;
+            listView.setLayoutParams(params);
+            listView.requestLayout();
+        } catch (Exception e){ }
     }
 }

@@ -33,12 +33,12 @@ public class LeaderBoardAdapter extends ArrayAdapter<Team> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.positionView.setText(team.getPositon()+"");
+//        viewHolder.positionView.setText(team.getPositon()+"");
         viewHolder.nameView.setText(team.getName());
-        viewHolder.matchesView.setText(team.getMatches()+"");
-        viewHolder.scoreView.setText(team.getScore()+"");
-        viewHolder.redCardsView.setText(team.getRedCards()+"");
-        viewHolder.yellowCardsView.setText(team.getYellowCards()+"");
+//        viewHolder.matchesView.setText(team.getMatches()+"");
+//        viewHolder.scoreView.setText(team.getScore()+"");
+//        viewHolder.redCardsView.setText(team.getRedCards()+"");
+//        viewHolder.yellowCardsView.setText(team.getYellowCards()+"");
 
         return convertView;
     }

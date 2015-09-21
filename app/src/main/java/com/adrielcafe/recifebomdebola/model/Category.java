@@ -5,9 +5,9 @@ import com.parse.ParseObject;
 
 import java.io.Serializable;
 
-@ParseClassName("Category")
+@ParseClassName("Modalidades")
 public class Category extends ParseObject implements Serializable {
     public String getName() {
-        return getString("name");
+        return getString("nome");
     }
 }

@@ -5,17 +5,17 @@ import com.parse.ParseObject;
 
 import java.io.Serializable;
 
-@ParseClassName("Contact")
+@ParseClassName("Contatos")
 public class Contact extends ParseObject implements Serializable {
     public String getName() {
-        return getString("name");
+        return getString("nome");
     }
 
     public String getRole() {
-        return getString("role");
+        return getString("funcao");
     }
 
     public String getPhone() {
-        return getString("phone");
+        return getString("telefone");
     }
 }
