@@ -38,7 +38,7 @@ public class MatchAdapter extends ArrayAdapter<Match> {
         }
 
         if(!Util.isNullOrEmpty(match.getField())){
-            details = "NO " + match.getField();
+            details = "NO " + match.getField().toUpperCase();
             if(!Util.isNullOrEmpty(match.getStartHour())){
                 details += ", ÀS " + match.getStartHour() + "H";
             } else {

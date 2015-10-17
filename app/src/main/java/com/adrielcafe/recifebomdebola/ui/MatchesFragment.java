@@ -34,7 +34,7 @@ public class MatchesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_match, container, false);
         ButterKnife.bind(this, root);
-        datePicker.setStartAndEndDateWithParts(2015, 9, 19, 2015, 12, 31);
+        datePicker.setStartAndEndDateWithParts(2015, 10, 16, 2015, 12, 31);
         datePicker.setDayViewOnClickListener(new DatePicker.DayViewOnClickListener() {
             @Override
             public void onDaySelected(DateTime date) {

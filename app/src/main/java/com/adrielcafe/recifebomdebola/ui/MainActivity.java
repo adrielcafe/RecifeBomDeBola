@@ -87,14 +87,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 matchesFragment = new MatchesFragment();
                 currentFragment = matchesFragment;
                 break;
-            case R.id.drawer_leaderboard:
-                if(currentFragment instanceof LeaderBoardFragment){
-                    return false;
-                }
-                title = getString(R.string.navigation_drawer_item_leaderboard);
-                leaderBoardFragment = new LeaderBoardFragment();
-                currentFragment = leaderBoardFragment;
-                break;
+//            case R.id.drawer_leaderboard:
+//                if(currentFragment instanceof LeaderBoardFragment){
+//                    return false;
+//                }
+//                title = getString(R.string.navigation_drawer_item_leaderboard);
+//                leaderBoardFragment = new LeaderBoardFragment();
+//                currentFragment = leaderBoardFragment;
+//                break;
             case R.id.drawer_fields:
                 if(currentFragment instanceof FieldsFragment){
                     return false;
@@ -102,13 +102,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 title = getString(R.string.navigation_drawer_item_fields);
                 currentFragment = new FieldsFragment();
                 break;
-            case R.id.drawer_judgments:
-                if(currentFragment instanceof JudgmentsFragment){
-                    return false;
-                }
-                title = getString(R.string.navigation_drawer_item_judgments);
-                currentFragment = new JudgmentsFragment();
-                break;
+//            case R.id.drawer_judgments:
+//                if(currentFragment instanceof JudgmentsFragment){
+//                    return false;
+//                }
+//                title = getString(R.string.navigation_drawer_item_judgments);
+//                currentFragment = new JudgmentsFragment();
+//                break;
             case R.id.drawer_rules:
                 if(currentFragment instanceof RulesFragment){
                     return false;

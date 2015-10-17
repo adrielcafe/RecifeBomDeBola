@@ -19,7 +19,7 @@ public class App extends Application {
     public static final String INSTAGRAM_ACCESS_TOKEN = "194598492.b42fc03.ef31e8592cf542bdaec4c0f7b0c9a8be";
 
     public static final String JUDGMENTS_PDF_URL = "https://recifebomdebola.files.wordpress.com/2014/10/julgamentos-2014.pdf";
-    public static final String RULES_PDF_URL = "https://recifebomdebola.files.wordpress.com/2014/09/rbb-regulamento-2014-final.pdf";
+    public static final String RULES_PDF_URL = "https://recifebomdebola.files.wordpress.com/2014/09/regulamento-oficial-aprovado-pdf.pdf";
 
     public static final String CONTACT_EMAIL = "recifebomdebola@gmail.com";
     public static final String SITE_URL = "http://recifebomdebola.wordpress.com";

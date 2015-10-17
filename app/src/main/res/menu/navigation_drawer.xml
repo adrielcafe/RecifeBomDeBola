@@ -10,20 +10,22 @@
             android:icon="@drawable/ic_matches"
             android:title="@string/navigation_drawer_item_agenda"/>
 
+        <!-- TODO update fragment
         <item
             android:id="@+id/drawer_leaderboard"
             android:icon="@drawable/ic_leaderboard"
-            android:title="@string/navigation_drawer_item_leaderboard"/>
+            android:title="@string/navigation_drawer_item_leaderboard"/>-->
 
         <item
             android:id="@+id/drawer_fields"
             android:icon="@drawable/ic_fields"
             android:title="@string/navigation_drawer_item_fields"/>
 
+        <!-- TODO update fragment
         <item
             android:id="@+id/drawer_judgments"
             android:icon="@drawable/ic_judgments"
-            android:title="@string/navigation_drawer_item_judgments"/>
+            android:title="@string/navigation_drawer_item_judgments"/>-->
 
         <item
             android:id="@+id/drawer_rules"
