@@ -54,8 +54,8 @@ public class MatchAdapter extends ArrayAdapter<Match> {
         viewHolder.team2ScoreView.setText(match.getTeam2Goals() + "");
         viewHolder.detailsView.setText(details);
 
-        viewHolder.team1ScoreView.setVisibility(Util.isNullOrEmpty(match.getTeam1Goals()) ? View.GONE : View.VISIBLE);
-        viewHolder.team2ScoreView.setVisibility(Util.isNullOrEmpty(match.getTeam2Goals()) ? View.GONE : View.VISIBLE);
+        viewHolder.team1ScoreView.setVisibility(match.getTeam1Goals() < 0 ? View.GONE : View.VISIBLE);
+        viewHolder.team2ScoreView.setVisibility(match.getTeam2Goals() < 0 ? View.GONE : View.VISIBLE);
         viewHolder.detailsView.setVisibility(Util.isNullOrEmpty(details) ? View.GONE : View.VISIBLE);
 
         viewHolder.versusView.setTypeface(Iconify.getTypeface(getContext()));

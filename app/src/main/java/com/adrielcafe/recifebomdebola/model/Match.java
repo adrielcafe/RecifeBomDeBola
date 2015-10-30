@@ -15,32 +15,14 @@ public class Match extends ParseObject implements Serializable {
         return getString("equipe2");
     }
 
-    public String getTeam1Goals() {
-        return getString("golsEquipe1");
+    public int getTeam1Goals() {
+	    Number number = getNumber("golsEquipe1");
+	    return number == null ? -1 : number.intValue();
     }
 
-    public String getTeam2Goals() {
-        return getString("golsEquipe2");
-    }
-
-    public int getTeam1YellowCards() {
-        return getInt("cartoesAmarelosEquipe1");
-    }
-
-    public int getTeam2YellowCards() {
-        return getInt("cartoesAmarelosEquipe2");
-    }
-
-    public int getTeam1RedCards() {
-        return getInt("cartoesVermelhosEquipe1");
-    }
-
-    public int getTeam2RedCards() {
-        return getInt("cartoesVermelhosEquipe2");
-    }
-
-    public String getStep() {
-        return getString("fase");
+    public int getTeam2Goals() {
+	    Number number = getNumber("golsEquipe2");
+	    return number == null ? -1 : number.intValue();
     }
 
     public String getGroup() {
@@ -65,10 +47,6 @@ public class Match extends ParseObject implements Serializable {
 
     public String getStartHour() {
         return getString("horaInicio");
-    }
-
-    public String getEndHour() {
-        return getString("horaFim");
     }
 
     public String getStatus() {
