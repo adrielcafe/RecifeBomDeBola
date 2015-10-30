@@ -10,23 +10,21 @@
     android:weightSum="10">
 
     <TextView
-        android:id="@+id/number"
-        android:layout_weight="2"
+        android:id="@+id/name"
+        android:layout_weight="5.5"
         android:gravity="left|center_vertical"
-        android:text="@string/number"
+        android:text="@string/player"
         android:textStyle="bold"
         android:textColor="@android:color/white"
         android:singleLine="true"
         style="@style/LeaderBoardTextView"/>
 
     <TextView
-        android:id="@+id/name"
-        android:layout_weight="5"
-        android:gravity="left|center_vertical"
-        android:text="@string/player"
+        android:id="@+id/goals"
+        android:layout_weight="1.5"
+        android:text="@string/goals"
         android:textStyle="bold"
         android:textColor="@android:color/white"
-        android:singleLine="true"
         style="@style/LeaderBoardTextView"/>
 
     <android.widget.IconTextView

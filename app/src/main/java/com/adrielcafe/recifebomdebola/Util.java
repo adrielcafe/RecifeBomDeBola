@@ -17,12 +17,22 @@ import android.widget.IconTextView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.adrielcafe.recifebomdebola.model.Player;
+import com.adrielcafe.recifebomdebola.ui.adapter.PlayerAdapter;
+import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
+import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 import com.joanzapata.android.iconify.IconDrawable;
 import com.joanzapata.android.iconify.Iconify;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
 import java.net.URLEncoder;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
+import java.util.List;
 
 public class Util {
     public static final String INSTAGRAM_MEDIA_RECENT_URL = "https://api.instagram.com/v1/users/515321534/media/recent/?access_token=" + App.INSTAGRAM_ACCESS_TOKEN;
@@ -30,6 +40,46 @@ public class Util {
 
     private static Picasso picasso;
     private static ConnectivityManager connectivityManager;
+
+    public static void openPlayersDialog(final Activity activity, final String teamName, String teamCategory, int teamRpa){
+        Db.getTeamPlayers(activity, teamName, teamCategory, teamRpa, new FindCallback<Player>() {
+            @Override
+            public void done(final List<Player> list, ParseException e) {
+                final View playersView = activity.getLayoutInflater().inflate(R.layout.dialog_players, null, false);
+                final ListView playersList = (ListView) playersView.findViewById(android.R.id.list);
+                IconTextView redCardsView = (IconTextView) playersView.findViewById(R.id.red_cards);
+                IconTextView yellowCardsView = (IconTextView) playersView.findViewById(R.id.yellow_cards);
+
+                redCardsView.setTypeface(Iconify.getTypeface(activity));
+                yellowCardsView.setTypeface(Iconify.getTypeface(activity));
+
+                ParseObject.pinAllInBackground(list);
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        playersList.setAdapter(new PlayerAdapter(activity, list));
+
+	                    final NiftyDialogBuilder playerDialog = NiftyDialogBuilder.getInstance(activity);
+                        playerDialog.setCustomView(playersView, activity)
+                                .withTitle(teamName)
+                                .withMessage(null)
+                                .withDuration(300)
+                                .withEffect(Effectstype.Fadein)
+                                .withDialogColor(activity.getResources().getColor(R.color.primary_dark))
+                                .withTitleColor(activity.getResources().getColor(R.color.accent))
+                                .withButton1Text(activity.getString(R.string.close))
+                                .setButton1Click(new View.OnClickListener() {
+	                                @Override
+	                                public void onClick(View v) {
+		                                playerDialog.dismiss();
+	                                }
+                                });
+	                    playerDialog.show();
+                    }
+                });
+            }
+        });
+    }
 
     public static String getPdfViewerUrl(String pdfUrl){
         try {
@@ -46,14 +96,14 @@ public class Util {
 
     public static void configMenuItem(Context context, MenuItem menuItem, Iconify.IconValue iconRes){
         menuItem.setIcon(new IconDrawable(context, iconRes)
-                .colorRes(android.R.color.white)
-                .actionBarSize());
+		        .colorRes(android.R.color.white)
+		        .actionBarSize());
     }
 
     public static SpannableString addCustomFont(CharSequence text){
         SpannableString title = new SpannableString(text);
         title.setSpan(new TypefaceSpan("Ubuntu-Regular.ttf"), 0, title.length(),
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return title;
     }
 
@@ -69,7 +119,14 @@ public class Util {
         return str == null || str.isEmpty();
     }
 
-    public static String toCamelCase(String s){
+	public static boolean isNumeric(String str){
+		NumberFormat formatter = NumberFormat.getInstance();
+		ParsePosition pos = new ParsePosition(0);
+		formatter.parse(str, pos);
+		return str.length() == pos.getIndex();
+	}
+
+	public static String toCamelCase(String s){
         try {
             String[] parts = s.split("_");
             String camelCaseString = "";

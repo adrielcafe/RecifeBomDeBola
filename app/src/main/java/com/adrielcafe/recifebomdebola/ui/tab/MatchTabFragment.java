@@ -28,6 +28,7 @@ import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -92,7 +93,18 @@ public class MatchTabFragment extends Fragment {
                     ParseObject.pinAllInBackground(list);
                     HashMap<String, List<Match>> groupTeams = getGroupMatches(list);
                     List<String> sortedGroups = new ArrayList<>(groupTeams.keySet());
-                    Collections.sort(sortedGroups);
+                    Collections.sort(sortedGroups, new Comparator<String>() {
+                        @Override
+                        public int compare(String lhs, String rhs) {
+                            if (Util.isNumeric(lhs) && lhs.length() == 1) {
+                                lhs = "0" + lhs;
+                            }
+                            if(Util.isNumeric(rhs) && rhs.length() == 1){
+                                rhs = "0" + rhs;
+                            }
+                            return lhs.compareTo(rhs);
+                        }
+                    });
 
                     for (String group : sortedGroups) {
                         ListView listView = (ListView) activity.getLayoutInflater().inflate(R.layout.fragment_match_list, null);

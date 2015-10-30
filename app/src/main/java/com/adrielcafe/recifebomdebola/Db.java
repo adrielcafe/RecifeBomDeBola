@@ -118,7 +118,7 @@ public class Db {
                         .whereEqualTo("modalidade", category)
                         .whereEqualTo("rpa", rpa)
                         .whereEqualTo("data", date.toString("dd/MM/YY"))
-                        .orderByDescending("data")
+                        .orderByAscending("group")
                         .findInBackground(callback);
             } else {
                 ParseQuery.getQuery(Match.class)
@@ -126,7 +126,7 @@ public class Db {
                         .whereEqualTo("modalidade", category)
                         .whereEqualTo("rpa", rpa)
                         .whereEqualTo("data", date.toString("dd/MM/YY"))
-                        .orderByDescending("data")
+                        .orderByAscending("group")
                         .findInBackground(callback);
             }
         } catch (Exception e){
@@ -134,18 +134,22 @@ public class Db {
         }
     }
 
-    public static void getTeamPlayers(Context context, String teamName, FindCallback<Player> callback){
+    public static void getTeamPlayers(Context context, String teamName, String category, int rpa, FindCallback<Player> callback){
         try {
             if(Util.isConnected(context)) {
                 ParseQuery.getQuery(Player.class)
-                        .whereEqualTo("team", teamName)
-                        .orderByAscending("number")
+                        .whereEqualTo("NOME_EQUIPE", teamName)
+                        .whereEqualTo("MODALIDADE_EQUIPE", category)
+                        .whereEqualTo("RPA_EQUIPE", rpa)
+                        .orderByAscending("NOME_JOGADOR")
                         .findInBackground(callback);
             } else {
                 ParseQuery.getQuery(Player.class)
                         .fromLocalDatastore()
-                        .whereEqualTo("team", teamName)
-                        .orderByAscending("number")
+                        .whereEqualTo("NOME_EQUIPE", teamName)
+                        .whereEqualTo("MODALIDADE_EQUIPE", category)
+                        .whereEqualTo("RPA_EQUIPE", rpa)
+                        .orderByAscending("NOME_JOGADOR")
                         .findInBackground(callback);
             }
         } catch (Exception e){

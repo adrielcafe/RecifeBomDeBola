@@ -7,8 +7,8 @@ android {
 
     defaultConfig {
         applicationId "com.adrielcafe.recifebomdebola"
-        versionCode 1
-        versionName "1.0"
+        versionCode 11
+        versionName "1.1"
         minSdkVersion 17
         targetSdkVersion 23
     }
@@ -29,7 +29,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-maps:8.1.0'
 
     compile 'com.nineoldandroids:library:2.4.0'
-    compile 'net.danlew:android.joda:2.9.0'
+    compile 'net.danlew:android.joda:2.8.2'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile 'com.jakewharton:butterknife:7.0.1'

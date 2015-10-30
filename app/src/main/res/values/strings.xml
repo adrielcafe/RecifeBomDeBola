@@ -6,8 +6,8 @@
 
     <string name="team">Equipe</string>
     <string name="player">Jogador</string>
+    <string name="goals">Gols</string>
     <string name="group">Grupo</string>
-    <string name="number">N˚</string>
     <string name="close">Fechar</string>
     <string name="connect_to_internet">Conecte-se a Internet</string>
     <string name="no_photo_found">Nenhuma Foto Encontrada</string>

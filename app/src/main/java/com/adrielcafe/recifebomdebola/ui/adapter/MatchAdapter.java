@@ -1,5 +1,6 @@
 package com.adrielcafe.recifebomdebola.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,7 @@ public class MatchAdapter extends ArrayAdapter<Match> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
-        Match match = getItem(position);
+        final Match match = getItem(position);
         String details;
 
         if (convertView == null) {
@@ -67,6 +68,19 @@ public class MatchAdapter extends ArrayAdapter<Match> {
         } else {
             viewHolder.versusView.setTextColor(viewHolder.versusView.getTextColors());
         }
+
+	    viewHolder.team1View.setOnClickListener(new View.OnClickListener() {
+		    @Override
+		    public void onClick(View v) {
+			    Util.openPlayersDialog((Activity) getContext(), match.getTeam1(), match.getCategory(), match.getRpa());
+		    }
+	    });
+	    viewHolder.team2View.setOnClickListener(new View.OnClickListener() {
+		    @Override
+		    public void onClick(View v) {
+			    Util.openPlayersDialog((Activity) getContext(), match.getTeam2(), match.getCategory(), match.getRpa());
+		    }
+	    });
 
         return convertView;
     }

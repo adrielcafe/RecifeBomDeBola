@@ -19,13 +19,9 @@ import com.adrielcafe.recifebomdebola.Db;
 import com.adrielcafe.recifebomdebola.R;
 import com.adrielcafe.recifebomdebola.Util;
 import com.adrielcafe.recifebomdebola.model.Category;
-import com.adrielcafe.recifebomdebola.model.Player;
 import com.adrielcafe.recifebomdebola.model.Team;
 import com.adrielcafe.recifebomdebola.ui.MainActivity;
 import com.adrielcafe.recifebomdebola.ui.adapter.LeaderBoardAdapter;
-import com.adrielcafe.recifebomdebola.ui.adapter.PlayerAdapter;
-import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
-import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 import com.joanzapata.android.iconify.Iconify;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -137,47 +133,6 @@ public class LeaderBoardTabFragment extends Fragment {
                                 activity.setLoading(false);
                             }
                         }, 1000);
-                    }
-                });
-            }
-        });
-    }
-
-    private void openPlayersDialog(final Team team){
-        activity.setLoading(true);
-        Db.getTeamPlayers(activity, team.getName(), new FindCallback<Player>() {
-            @Override
-            public void done(final List<Player> list, ParseException e) {
-                final View playersView = getLayoutInflater(null).inflate(R.layout.dialog_players, null, false);
-                final ListView playersList = (ListView) playersView.findViewById(android.R.id.list);
-                IconTextView redCardsView = (IconTextView) playersView.findViewById(R.id.red_cards);
-                IconTextView yellowCardsView = (IconTextView) playersView.findViewById(R.id.yellow_cards);
-
-                redCardsView.setTypeface(Iconify.getTypeface(activity));
-                yellowCardsView.setTypeface(Iconify.getTypeface(activity));
-
-                ParseObject.pinAllInBackground(list);
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        playersList.setAdapter(new PlayerAdapter(activity, list));
-
-                        final NiftyDialogBuilder playerDialog = NiftyDialogBuilder.getInstance(activity);
-                        playerDialog.setCustomView(playersView, activity)
-                                .withTitle(team.getName())
-                                .withMessage(null)
-                                .withDuration(300)
-                                .withEffect(Effectstype.Fadein)
-                                .withDialogColor(getResources().getColor(R.color.accent))
-                                .withButton1Text(getString(R.string.close))
-                                .setButton1Click(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        playerDialog.dismiss();
-                                    }
-                                });
-                        playerDialog.show();
-                        activity.setLoading(false);
                     }
                 });
             }

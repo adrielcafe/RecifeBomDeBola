@@ -33,8 +33,8 @@ public class PlayerAdapter extends ArrayAdapter<Player> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.numberView.setText(player.getNumber()+"");
         viewHolder.nameView.setText(player.getName());
+        viewHolder.goalsView.setText(player.getGoals() + "");
         viewHolder.yellowCardsView.setText(player.getYellowCards()+"");
         viewHolder.redCardsView.setText(player.getRedCards()+"");
 
@@ -42,10 +42,10 @@ public class PlayerAdapter extends ArrayAdapter<Player> {
     }
 
     static class ViewHolder {
-        @Bind(R.id.number)
-        TextView numberView;
         @Bind(R.id.name)
         TextView nameView;
+        @Bind(R.id.goals)
+        TextView goalsView;
         @Bind(R.id.yellow_cards)
         TextView yellowCardsView;
         @Bind(R.id.red_cards)
