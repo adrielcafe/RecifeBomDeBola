@@ -3,11 +3,12 @@ package com.adrielcafe.recifebomdebola.ui;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.adrielcafe.recifebomdebola.Db;
 import com.adrielcafe.recifebomdebola.R;
 
-public class SplashScreenActivity extends BaseActivity {
+public class SplashScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

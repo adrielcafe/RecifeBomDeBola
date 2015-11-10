@@ -3,7 +3,7 @@ apply plugin: 'com.ofg.uptodate'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
         applicationId "com.adrielcafe.recifebomdebola"
@@ -26,10 +26,10 @@ dependencies {
 
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.android.support:design:23.1.0'
-    compile 'com.google.android.gms:play-services-maps:8.1.0'
+    compile 'com.google.android.gms:play-services-maps:8.3.0'
 
     compile 'com.nineoldandroids:library:2.4.0'
-    compile 'net.danlew:android.joda:2.8.2'
+    compile 'net.danlew:android.joda:2.9.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile 'com.jakewharton:butterknife:7.0.1'
@@ -38,10 +38,9 @@ dependencies {
 
     compile 'com.joanzapata.android:android-iconify:1.0.11'
     compile 'com.tsengvn:Typekit:1.0.0@aar'
-    compile 'com.readystatesoftware.systembartint:systembartint:1.0.4@aar'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.10@aar'
     compile 'com.felipecsl.asymmetricgridview:library:2.0.1@aar'
-    compile 'com.lsjwzh:materialloadingprogressbar:0.5.6-RELEASE@aar'
+    compile 'com.lsjwzh:materialloadingprogressbar:0.5.8-RELEASE@aar'
     compile 'com.github.sd6352051.niftydialogeffects:niftydialogeffects:1.0.0@aar'
     compile 'com.github.asantibanez:Ranger:c67bb86397@aar'
 }

@@ -87,52 +87,52 @@ public class MatchTabFragment extends Fragment {
     private void loadMatches() {
         activity.setLoading(true);
         Db.getMatches(activity, category, rpa, date, new FindCallback<Match>() {
-            @Override
-            public void done(final List<Match> list, ParseException e) {
-                if (list != null && !list.isEmpty()) {
-                    ParseObject.pinAllInBackground(list);
-                    HashMap<String, List<Match>> groupTeams = getGroupMatches(list);
-                    List<String> sortedGroups = new ArrayList<>(groupTeams.keySet());
-                    Collections.sort(sortedGroups, new Comparator<String>() {
-                        @Override
-                        public int compare(String lhs, String rhs) {
-                            if (Util.isNumeric(lhs) && lhs.length() == 1) {
-                                lhs = "0" + lhs;
-                            }
-                            if(Util.isNumeric(rhs) && rhs.length() == 1){
-                                rhs = "0" + rhs;
-                            }
-                            return lhs.compareTo(rhs);
-                        }
-                    });
+	        @Override
+	        public void done(final List<Match> list, ParseException e) {
+		        if (list != null && !list.isEmpty()) {
+			        ParseObject.pinAllInBackground(list);
+			        HashMap<String, List<Match>> groupTeams = getGroupMatches(list);
+			        List<String> sortedGroups = new ArrayList<>(groupTeams.keySet());
+			        Collections.sort(sortedGroups, new Comparator<String>() {
+				        @Override
+				        public int compare(String lhs, String rhs) {
+					        if (Util.isNumeric(lhs) && lhs.length() == 1) {
+						        lhs = "0" + lhs;
+					        }
+					        if (Util.isNumeric(rhs) && rhs.length() == 1) {
+						        rhs = "0" + rhs;
+					        }
+					        return lhs.compareTo(rhs);
+				        }
+			        });
 
-                    for (String group : sortedGroups) {
-                        ListView listView = (ListView) activity.getLayoutInflater().inflate(R.layout.fragment_match_list, null);
-                        listView.setAdapter(new MatchAdapter(activity, groupTeams.get(group)));
-                        addListHeader(listView, group);
-                        contentLayout.addView(listView);
-                        Util.setListViewHeightBasedOnChildren(listView);
-                    }
+			        for (String group : sortedGroups) {
+				        ListView listView = (ListView) activity.getLayoutInflater().inflate(R.layout.fragment_match_list, null);
+				        listView.setAdapter(new MatchAdapter(activity, groupTeams.get(group)));
+				        addListHeader(listView, group);
+				        contentLayout.addView(listView);
+				        Util.setListViewHeightBasedOnChildren(listView);
+			        }
 
-                    contentLayout.setGravity(Gravity.LEFT | Gravity.TOP);
-                } else {
-                    View emptyView = Util.getEmptyView(activity);
-                    contentLayout.addView(emptyView);
-                    contentLayout.setGravity(Gravity.CENTER);
-                }
+			        contentLayout.setGravity(Gravity.LEFT | Gravity.TOP);
+		        } else if (contentLayout != null) {
+			        View emptyView = Util.getEmptyView(activity);
+			        contentLayout.addView(emptyView);
+			        contentLayout.setGravity(Gravity.CENTER);
+		        }
 
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                activity.setLoading(false);
-                            }
-                        }, 1000);
-                    }
-                });
-            }
+		        activity.runOnUiThread(new Runnable() {
+			        @Override
+			        public void run() {
+				        new Handler().postDelayed(new Runnable() {
+					        @Override
+					        public void run() {
+						        activity.setLoading(false);
+					        }
+				        }, 1000);
+			        }
+		        });
+	        }
         });
     }
 
@@ -150,11 +150,13 @@ public class MatchTabFragment extends Fragment {
     }
 
     private void addListHeader(ListView listView, String group){
-        View headerView = activity.getLayoutInflater().inflate(R.layout.list_header_match, null);
-        TextView groupView = (TextView) headerView.findViewById(R.id.group);
-
-        groupView.setText(activity.getString(R.string.group) + " " + group);
-
-        listView.addHeaderView(headerView, null, false);
+        try {
+            View headerView = activity.getLayoutInflater().inflate(R.layout.list_header_match, null);
+            TextView groupView = (TextView) headerView.findViewById(R.id.group);
+            groupView.setText(activity.getString(R.string.group) + " " + group);
+            listView.addHeaderView(headerView, null, false);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

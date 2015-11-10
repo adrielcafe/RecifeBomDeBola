@@ -8,9 +8,7 @@
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/status_bar_height"
-        android:layout_marginBottom="@dimen/navigation_bar_height">
+        android:layout_height="match_parent">
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
@@ -37,7 +35,6 @@
             android:id="@+id/progress"
             android:layout_width="?actionBarSize"
             android:layout_height="?actionBarSize"
-            android:layout_marginTop="?actionBarSize"
             android:layout_gravity="center"
             android:visibility="gone"/>
 
@@ -45,8 +42,8 @@
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="?actionBarSize"
-            android:background="@color/main_bg"/>
+            android:background="@color/main_bg"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     </android.support.design.widget.CoordinatorLayout>
 

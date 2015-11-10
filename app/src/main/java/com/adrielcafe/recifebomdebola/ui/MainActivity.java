@@ -11,6 +11,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.view.Menu;
@@ -31,14 +32,14 @@ import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int DELAY = 275;
 
     private Fragment currentFragment;
     private MatchesFragment matchesFragment;
     private LeaderBoardFragment leaderBoardFragment;
 
-    private MenuItem rpaMenuItem;
+    public MenuItem rpaMenuItem;
     private MenuItem facebookMenuItem;
     private MenuItem instagramMenuItem;
 
@@ -170,24 +171,24 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         Util.configMenuItem(this, instagramMenuItem, Iconify.IconValue.fa_instagram);
 
         Spinner rpaSpinner = (Spinner) MenuItemCompat.getActionView(rpaMenuItem);
-        rpaSpinner.setAdapter(new ArrayAdapter<>(getSupportActionBar().getThemedContext(), android.R.layout.simple_spinner_dropdown_item, Db.rpas));
+        rpaSpinner.setAdapter(new ArrayAdapter<>(getSupportActionBar().getThemedContext(), R.layout.spinner_item_rpa, Db.rpas));
         rpaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                currentRpa = Db.getRpaAtIndex(position);
-                try {
-                    if (currentFragment instanceof MatchesFragment) {
-                        matchesFragment.setupViewPager();
-                    } else if (currentFragment instanceof LeaderBoardFragment) {
-                        leaderBoardFragment.setupViewPager();
-                    }
-                } catch (Exception e) {
-                }
-            }
+	        @Override
+	        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+		        currentRpa = Db.getRpaAtIndex(position);
+		        try {
+			        if (currentFragment instanceof MatchesFragment) {
+				        matchesFragment.setupViewPager();
+			        } else if (currentFragment instanceof LeaderBoardFragment) {
+				        leaderBoardFragment.setupViewPager();
+			        }
+		        } catch (Exception e) {
+		        }
+	        }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
+	        @Override
+	        public void onNothingSelected(AdapterView<?> parent) {
+	        }
         });
 
         updateToolbar();
