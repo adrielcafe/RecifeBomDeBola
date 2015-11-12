@@ -7,8 +7,10 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
         android:src="@drawable/logo"/>
 
     <pl.droidsonroids.gif.GifImageView

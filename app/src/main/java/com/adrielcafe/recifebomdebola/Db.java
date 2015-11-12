@@ -5,10 +5,10 @@ import android.content.Context;
 import com.adrielcafe.recifebomdebola.model.Category;
 import com.adrielcafe.recifebomdebola.model.Contact;
 import com.adrielcafe.recifebomdebola.model.Field;
+import com.adrielcafe.recifebomdebola.model.LeaderBoard;
 import com.adrielcafe.recifebomdebola.model.Match;
 import com.adrielcafe.recifebomdebola.model.Photo;
 import com.adrielcafe.recifebomdebola.model.Player;
-import com.adrielcafe.recifebomdebola.model.Team;
 import com.goebl.david.Webb;
 import com.parse.FindCallback;
 import com.parse.ParseObject;
@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Db {
-    public static List<Team> teams;
     public static List<Field> fields;
     public static List<Contact> contacts;
     public static List<Photo> photos;
@@ -60,20 +59,6 @@ public class Db {
 
         try {
             if(Util.isConnected(context)) {
-                teams = ParseQuery.getQuery(Team.class).find();
-                ParseObject.pinAllInBackground(teams);
-            } else {
-                teams = ParseQuery.getQuery(Team.class)
-                        .fromLocalDatastore()
-                        .find();
-            }
-        } catch (Exception e){
-            teams = new ArrayList<>();
-            e.printStackTrace();
-        }
-
-        try {
-            if(Util.isConnected(context)) {
                 categories = ParseQuery.getQuery(Category.class).find();
                 ParseObject.pinAllInBackground(categories);
             } else {
@@ -92,15 +77,15 @@ public class Db {
         }
     }
 
-    public static void getTeams(Context context, String category, int rpa, FindCallback<Team> callback){
+    public static void getLeaderBoard(Context context, String category, int rpa, FindCallback<LeaderBoard> callback){
         try {
             if(Util.isConnected(context)) {
-                ParseQuery.getQuery(Team.class)
+                ParseQuery.getQuery(LeaderBoard.class)
                         .whereEqualTo("modalidade", category)
                         .whereEqualTo("rpa", rpa)
                         .findInBackground(callback);
             } else {
-                ParseQuery.getQuery(Team.class)
+                ParseQuery.getQuery(LeaderBoard.class)
                         .fromLocalDatastore()
                         .whereEqualTo("modalidade", category)
                         .whereEqualTo("rpa", rpa)

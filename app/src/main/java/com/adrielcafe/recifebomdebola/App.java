@@ -5,9 +5,9 @@ import android.app.Application;
 import com.adrielcafe.recifebomdebola.model.Category;
 import com.adrielcafe.recifebomdebola.model.Contact;
 import com.adrielcafe.recifebomdebola.model.Field;
+import com.adrielcafe.recifebomdebola.model.LeaderBoard;
 import com.adrielcafe.recifebomdebola.model.Match;
 import com.adrielcafe.recifebomdebola.model.Player;
-import com.adrielcafe.recifebomdebola.model.Team;
 import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
@@ -45,9 +45,9 @@ public class App extends Application {
     }
 
     private void initParse(){
+        ParseObject.registerSubclass(LeaderBoard.class);
         ParseObject.registerSubclass(Match.class);
         ParseObject.registerSubclass(Field.class);
-        ParseObject.registerSubclass(Team.class);
         ParseObject.registerSubclass(Category.class);
         ParseObject.registerSubclass(Contact.class);
         ParseObject.registerSubclass(Player.class);

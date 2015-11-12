@@ -88,14 +88,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 matchesFragment = new MatchesFragment();
                 currentFragment = matchesFragment;
                 break;
-//            case R.id.drawer_leaderboard:
-//                if(currentFragment instanceof LeaderBoardFragment){
-//                    return false;
-//                }
-//                title = getString(R.string.navigation_drawer_item_leaderboard);
-//                leaderBoardFragment = new LeaderBoardFragment();
-//                currentFragment = leaderBoardFragment;
-//                break;
+            case R.id.drawer_leaderboard:
+                if(currentFragment instanceof LeaderBoardFragment){
+                    return false;
+                }
+                title = getString(R.string.navigation_drawer_item_leaderboard);
+                leaderBoardFragment = new LeaderBoardFragment();
+                currentFragment = leaderBoardFragment;
+                break;
             case R.id.drawer_fields:
                 if(currentFragment instanceof FieldsFragment){
                     return false;

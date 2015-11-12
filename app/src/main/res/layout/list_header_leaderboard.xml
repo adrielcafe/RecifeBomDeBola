@@ -23,19 +23,17 @@
         android:weightSum="1" >
 
         <TextView
-            android:id="@+id/position"
-            android:gravity="left|center_vertical"
-            android:text="#"
-            android:textStyle="bold"
-            style="@style/LeaderBoardTextView"/>
-
-        <TextView
-            android:id="@+id/name"
+            android:id="@+id/team"
             android:layout_weight="0.5"
             android:gravity="left|center_vertical"
             android:text="@string/team"
             android:textStyle="bold"
-            android:maxLines="2"
+            style="@style/LeaderBoardTextView"/>
+
+        <TextView
+            android:id="@+id/points_scored"
+            android:text="PG"
+            android:textStyle="bold"
             style="@style/LeaderBoardTextView"/>
 
         <TextView
@@ -45,21 +43,21 @@
             style="@style/LeaderBoardTextView"/>
 
         <TextView
-            android:id="@+id/score"
-            android:text="P"
+            android:id="@+id/wins"
+            android:text="V"
             android:textStyle="bold"
             style="@style/LeaderBoardTextView"/>
 
-        <android.widget.IconTextView
-            android:id="@+id/yellow_cards"
-            android:text="{fa-square}"
-            android:textColor="@color/yellow"
+        <TextView
+            android:id="@+id/draws"
+            android:text="E"
+            android:textStyle="bold"
             style="@style/LeaderBoardTextView"/>
 
-        <android.widget.IconTextView
-            android:id="@+id/red_cards"
-            android:text="{fa-square}"
-            android:textColor="@color/red"
+        <TextView
+            android:id="@+id/defeats"
+            android:text="D"
+            android:textStyle="bold"
             style="@style/LeaderBoardTextView"/>
 
     </LinearLayout>

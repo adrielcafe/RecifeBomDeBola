@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.IconTextView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,16 +18,16 @@ import com.adrielcafe.recifebomdebola.Db;
 import com.adrielcafe.recifebomdebola.R;
 import com.adrielcafe.recifebomdebola.Util;
 import com.adrielcafe.recifebomdebola.model.Category;
-import com.adrielcafe.recifebomdebola.model.Team;
+import com.adrielcafe.recifebomdebola.model.LeaderBoard;
 import com.adrielcafe.recifebomdebola.ui.MainActivity;
 import com.adrielcafe.recifebomdebola.ui.adapter.LeaderBoardAdapter;
-import com.joanzapata.android.iconify.Iconify;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -83,46 +82,58 @@ public class LeaderBoardTabFragment extends Fragment {
 
     private void loadLeaderBoard() {
         activity.setLoading(true);
-        Db.getTeams(activity, category, rpa, new FindCallback<Team>() {
+        Db.getLeaderBoard(activity, category, rpa, new FindCallback<LeaderBoard>() {
             @Override
-            public void done(final List<Team> list, ParseException e) {
+            public void done(final List<LeaderBoard> list, ParseException e) {
                 if (list != null && !list.isEmpty()) {
                     ParseObject.pinAllInBackground(list);
-                    HashMap<String, List<Team>> groupTeams = getGroupTeams(list);
+                    HashMap<String, List<LeaderBoard>> groupTeams = getGroupTeams(list);
                     List<String> sortedGroups = new ArrayList<>(groupTeams.keySet());
-                    Collections.sort(sortedGroups);
+                    Collections.sort(sortedGroups, new Comparator<String>() {
+                        @Override
+                        public int compare(String lhs, String rhs) {
+                            if (Util.isNumeric(lhs) && lhs.length() == 1) {
+                                lhs = "0" + lhs;
+                            }
+                            if (Util.isNumeric(rhs) && rhs.length() == 1) {
+                                rhs = "0" + rhs;
+                            }
+                            return lhs.compareTo(rhs);
+                        }
+                    });
 
                     for (String group : sortedGroups) {
+                        List<LeaderBoard> leaderBoards = groupTeams.get(group);
+                        Collections.sort(leaderBoards, new Comparator<LeaderBoard>() {
+                            @Override
+                            public int compare(LeaderBoard lhs, LeaderBoard rhs) {
+	                            String lhsStr = lhs.getPointsScored() < 10 ? "0" + lhs.getPointsScored() : "" + lhs.getPointsScored();
+	                            String rhsStr = rhs.getPointsScored() < 10 ? "0" + rhs.getPointsScored() : "" + rhs.getPointsScored();
+                                return rhsStr.compareTo(lhsStr);
+                            }
+                        });
+
                         ListView listView = (ListView) activity.getLayoutInflater().inflate(R.layout.fragment_leaderboard_list, null);
                         listView.setAdapter(new LeaderBoardAdapter(activity, groupTeams.get(group)));
                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                Team team = list.get(position);
-                                //openPlayersDialog(team);
+                                LeaderBoard leaderBoard = list.get(position);
+                                Util.openPlayersDialog(activity, leaderBoard.getTeam(), leaderBoard.getCategory(), leaderBoard.getRpa());
                             }
                         });
+
                         addListHeader(listView, group);
                         contentLayout.addView(listView);
                         Util.setListViewHeightBasedOnChildren(listView);
                     }
 
                     contentLayout.setGravity(Gravity.LEFT | Gravity.TOP);
-                } else {
+                } else if (contentLayout != null) {
                     View emptyView = Util.getEmptyView(activity);
                     contentLayout.addView(emptyView);
                     contentLayout.setGravity(Gravity.CENTER);
                 }
-
-//                Collections.sort(list, new Comparator<Team>() {
-//                    @Override
-//                    public int compare(Team lhs, Team rhs) {
-//                        return Integer.valueOf(rhs.getScore()).compareTo(lhs.getScore());
-//                    }
-//                });
-//                for(int i = 0; i < list.size(); i++){
-//                    list.get(i).setPositon(i + 1);
-//                }
 
                 activity.runOnUiThread(new Runnable() {
                     @Override
@@ -139,29 +150,23 @@ public class LeaderBoardTabFragment extends Fragment {
         });
     }
 
-    private HashMap<String, List<Team>> getGroupTeams(List<Team> teams){
-        HashMap<String, List<Team>> groupTeams = new HashMap<>();
-        for (Team team : teams){
-            if (!Util.isNullOrEmpty(team.getGroup())) {
-                if (!groupTeams.containsKey(team.getGroup())) {
-                    groupTeams.put(team.getGroup(), new ArrayList<Team>());
+    private HashMap<String, List<LeaderBoard>> getGroupTeams(List<LeaderBoard> leaderBoards){
+        HashMap<String, List<LeaderBoard>> groupLeaderBoard = new HashMap<>();
+        for (LeaderBoard leaderBoard : leaderBoards){
+            if (!Util.isNullOrEmpty(leaderBoard.getGroup())) {
+                if (!groupLeaderBoard.containsKey(leaderBoard.getGroup())) {
+                    groupLeaderBoard.put(leaderBoard.getGroup(), new ArrayList<LeaderBoard>());
                 }
-                groupTeams.get(team.getGroup()).add(team);
+                groupLeaderBoard.get(leaderBoard.getGroup()).add(leaderBoard);
             }
         }
-        return groupTeams;
+        return groupLeaderBoard;
     }
 
     private void addListHeader(ListView listView, String group){
         View headerView = activity.getLayoutInflater().inflate(R.layout.list_header_leaderboard, null);
         TextView groupView = (TextView) headerView.findViewById(R.id.group);
-        IconTextView redCardsView = (IconTextView) headerView.findViewById(R.id.red_cards);
-        IconTextView yellowCardsView = (IconTextView) headerView.findViewById(R.id.yellow_cards);
-
         groupView.setText(getString(R.string.group) + " " + group);
-        redCardsView.setTypeface(Iconify.getTypeface(activity));
-        yellowCardsView.setTypeface(Iconify.getTypeface(activity));
-
         listView.addHeaderView(headerView, null, false);
     }
 }
