@@ -24,6 +24,7 @@
     <string name="navigation_drawer_open">Abrir</string>
     <string name="navigation_drawer_close">Fechar</string>
 
+    <string name="navigation_drawer_item_playoff">Eliminatórias</string>
     <string name="navigation_drawer_item_agenda">Agenda de Jogos</string>
     <string name="navigation_drawer_item_leaderboard">Classificação</string>
     <string name="navigation_drawer_item_fields">Campos</string>
@@ -34,6 +35,7 @@
     <string name="navigation_drawer_item_about">Sobre</string>
 
     <string-array name="navigation_drawer_items">
+        <item>@string/navigation_drawer_item_playoff</item>
         <item>@string/navigation_drawer_item_agenda</item>
         <item>@string/navigation_drawer_item_leaderboard</item>
         <item>@string/navigation_drawer_item_fields</item>

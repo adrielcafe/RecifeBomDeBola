@@ -8,6 +8,7 @@ import com.adrielcafe.recifebomdebola.model.Field;
 import com.adrielcafe.recifebomdebola.model.LeaderBoard;
 import com.adrielcafe.recifebomdebola.model.Match;
 import com.adrielcafe.recifebomdebola.model.Player;
+import com.adrielcafe.recifebomdebola.model.Playoff;
 import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
@@ -29,6 +30,7 @@ public class App extends Application {
     public static final String EXTRA_CATEGORY = "category";
     public static final String EXTRA_RPA = "rpa";
     public static final String EXTRA_DATE = "date";
+    public static final String EXTRA_KEY = "key";
 
     public static final int RPA_COUNT = 6;
 
@@ -47,6 +49,7 @@ public class App extends Application {
     private void initParse(){
         ParseObject.registerSubclass(LeaderBoard.class);
         ParseObject.registerSubclass(Match.class);
+        ParseObject.registerSubclass(Playoff.class);
         ParseObject.registerSubclass(Field.class);
         ParseObject.registerSubclass(Category.class);
         ParseObject.registerSubclass(Contact.class);

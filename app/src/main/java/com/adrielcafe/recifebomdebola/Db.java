@@ -9,6 +9,7 @@ import com.adrielcafe.recifebomdebola.model.LeaderBoard;
 import com.adrielcafe.recifebomdebola.model.Match;
 import com.adrielcafe.recifebomdebola.model.Photo;
 import com.adrielcafe.recifebomdebola.model.Player;
+import com.adrielcafe.recifebomdebola.model.Playoff;
 import com.goebl.david.Webb;
 import com.parse.FindCallback;
 import com.parse.ParseObject;
@@ -89,6 +90,27 @@ public class Db {
                         .fromLocalDatastore()
                         .whereEqualTo("modalidade", category)
                         .whereEqualTo("rpa", rpa)
+                        .findInBackground(callback);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void getPlayoff(Context context, String category, int rpa, int key, FindCallback<Playoff> callback){
+        try {
+            if(Util.isConnected(context)) {
+                ParseQuery.getQuery(Playoff.class)
+                        .whereEqualTo("modalidade", category)
+                        .whereEqualTo("rpa", rpa)
+                        .whereEqualTo("chave", key)
+                        .findInBackground(callback);
+            } else {
+                ParseQuery.getQuery(Playoff.class)
+                        .fromLocalDatastore()
+                        .whereEqualTo("modalidade", category)
+                        .whereEqualTo("rpa", rpa)
+                        .whereEqualTo("chave", key)
                         .findInBackground(callback);
             }
         } catch (Exception e){

@@ -5,6 +5,12 @@
         android:checkableBehavior="single">
 
         <item
+            android:id="@+id/drawer_playoff"
+            android:checked="true"
+            android:icon="@drawable/ic_playoffs"
+            android:title="@string/navigation_drawer_item_playoff"/>
+
+        <item
             android:id="@+id/drawer_matches"
             android:checked="true"
             android:icon="@drawable/ic_matches"

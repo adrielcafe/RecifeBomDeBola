@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int DELAY = 275;
 
     private Fragment currentFragment;
+    private PlayoffsFragment playoffsFragment;
     private MatchesFragment matchesFragment;
     private LeaderBoardFragment leaderBoardFragment;
 
@@ -79,7 +80,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         drawerLayout.closeDrawers();
-        switch (menuItem == null ? R.id.drawer_matches : menuItem.getItemId()) {
+        switch (menuItem == null ? R.id.drawer_playoff : menuItem.getItemId()) {
+            case R.id.drawer_playoff:
+                if(currentFragment instanceof PlayoffsFragment){
+                    return false;
+                }
+                title = getString(R.string.navigation_drawer_item_playoff);
+                playoffsFragment = new PlayoffsFragment();
+                currentFragment = playoffsFragment;
+                break;
             case R.id.drawer_matches:
                 if(currentFragment instanceof MatchesFragment){
                     return false;
@@ -177,9 +186,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 		        currentRpa = Db.getRpaAtIndex(position);
 		        try {
-			        if (currentFragment instanceof MatchesFragment) {
-				        matchesFragment.setupViewPager();
-			        } else if (currentFragment instanceof LeaderBoardFragment) {
+                    if (currentFragment instanceof PlayoffsFragment) {
+                        playoffsFragment.setupViewPager();
+                    } else if (currentFragment instanceof MatchesFragment) {
+                        matchesFragment.setupViewPager();
+                    } else if (currentFragment instanceof LeaderBoardFragment) {
 				        leaderBoardFragment.setupViewPager();
 			        }
 		        } catch (Exception e) {
@@ -242,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             rpaMenuItem.setVisible(false);
             facebookMenuItem.setVisible(false);
             instagramMenuItem.setVisible(false);
-            if(currentFragment instanceof MatchesFragment || currentFragment instanceof LeaderBoardFragment){
+            if(currentFragment instanceof PlayoffsFragment || currentFragment instanceof MatchesFragment || currentFragment instanceof LeaderBoardFragment){
                 tabLayout.setVisibility(View.VISIBLE);
                 rpaMenuItem.setVisible(true);
             } else if(currentFragment instanceof ContactFragment || currentFragment instanceof PhotosFragment){
