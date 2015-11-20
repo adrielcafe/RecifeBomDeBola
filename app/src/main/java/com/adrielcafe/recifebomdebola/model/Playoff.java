@@ -15,6 +15,16 @@ public class Playoff extends ParseObject implements Serializable {
         return getString("equipe2");
     }
 
+    public int getTeam1Goals() {
+        Number number = getNumber("golsEquipe1");
+        return number == null ? -1 : number.intValue();
+    }
+
+    public int getTeam2Goals() {
+        Number number = getNumber("golsEquipe2");
+        return number == null ? -1 : number.intValue();
+    }
+
     public int getKey() {
         return getInt("chave");
     }

@@ -51,10 +51,12 @@ public class PlayoffAdapter extends ArrayAdapter<Playoff> {
 
         viewHolder.team1View.setText(Util.toCamelCase(match.getTeam1()));
         viewHolder.team2View.setText(Util.toCamelCase(match.getTeam2()));
+        viewHolder.team1ScoreView.setText(match.getTeam1Goals()+"");
+        viewHolder.team2ScoreView.setText(match.getTeam2Goals() + "");
         viewHolder.detailsView.setText(details);
 
-        viewHolder.team1ScoreView.setVisibility(View.GONE);
-        viewHolder.team2ScoreView.setVisibility(View.GONE);
+        viewHolder.team1ScoreView.setVisibility(match.getTeam1Goals() < 0 ? View.GONE : View.VISIBLE);
+        viewHolder.team2ScoreView.setVisibility(match.getTeam2Goals() < 0 ? View.GONE : View.VISIBLE);
         viewHolder.detailsView.setVisibility(Util.isNullOrEmpty(details) ? View.GONE : View.VISIBLE);
 
         viewHolder.versusView.setTypeface(Iconify.getTypeface(getContext()));
